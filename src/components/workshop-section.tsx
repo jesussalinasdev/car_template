@@ -85,8 +85,8 @@ export function WorkshopSection() {
                 ['24 hr', 'Climate Control'],
               ].map(([val, label]) => (
                 <div key={label}>
-                  <div className="font-display text-3xl text-primary leading-none">{val}</div>
-                  <div className="font-mono text-[9px] text-white/35 uppercase tracking-widest mt-1">{label}</div>
+                  <div className="font-display text-5xl md:text-6xl text-primary leading-none drop-shadow-[0_0_15px_rgba(255,69,0,0.4)]">{val}</div>
+                  <div className="font-mono text-[11px] md:text-sm text-white/50 uppercase tracking-widest mt-2">{label}</div>
                 </div>
               ))}
             </motion.div>

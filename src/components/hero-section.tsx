@@ -78,7 +78,7 @@ export function HeroSection() {
   useEffect(() => currentRPM.on('change', v => setRpm(Math.round(v))), [currentRPM]);
 
   return (
-    <div ref={containerRef} className="relative w-full bg-black h-[250vh]">
+    <div ref={containerRef} className="relative w-full overflow-hidden bg-black h-[250vh]">
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center perspective-1000">
         
         {/* INITIAL SCAN LINE */}
@@ -91,7 +91,7 @@ export function HeroSection() {
 
         {/* --- LAYER -3 (Background / Grid) --- */}
         <motion.div 
-          className="absolute inset-0 z-0 opacity-30 pointer-events-none"
+          className="absolute inset-0 z-0 opacity-30 pointer-events-none hidden md:block"
           style={{ x: layerMinus3X, y: layerMinus3Y }}
         >
           <div 
@@ -116,7 +116,7 @@ export function HeroSection() {
 
         {/* --- LAYER -2 (Large Blueprint Rings) --- */}
         <motion.div 
-          className="absolute inset-0 z-0 flex items-center justify-center opacity-10 pointer-events-none"
+          className="absolute inset-0 z-0 flex items-center justify-center opacity-10 pointer-events-none hidden md:block"
           style={{ x: layerMinus2X, y: layerMinus2Y }}
         >
           <svg viewBox="0 0 1000 1000" className="w-[150vw] h-[150vw] max-w-[1500px] max-h-[1500px] animate-[spin_120s_linear_infinite]">
@@ -129,7 +129,7 @@ export function HeroSection() {
         </motion.div>
 
         {/* --- LAYER -1 (Floating Mechanical SVGs) --- */}
-        <motion.div className="absolute inset-0 z-0 pointer-events-none" style={{ x: layerMinus1X, y: layerMinus1Y }}>
+        <motion.div className="absolute inset-0 z-0 pointer-events-none hidden md:block" style={{ x: layerMinus1X, y: layerMinus1Y }}>
           {/* Gear 1 */}
           <motion.svg className="absolute top-[20%] right-[15%] w-32 h-32 text-primary/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"
             animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }}>
@@ -151,11 +151,11 @@ export function HeroSection() {
 
         {/* --- LAYER 0 (Main Car Subject) --- */}
         <motion.div 
-          className="absolute inset-0 flex items-center justify-end pr-[5vw] lg:pr-[10vw] z-10 pointer-events-none"
+          className="absolute inset-0 flex items-center justify-center md:justify-end md:pr-[5vw] lg:pr-[10vw] z-10 pointer-events-none pt-[35vh] md:pt-0"
           style={{ x: layer0X, y: layer0Y }}
         >
           <motion.div 
-            className="relative w-[85vw] md:w-[75vw] lg:w-[65vw] max-w-[1200px] aspect-[16/9]"
+            className="relative w-[130vw] md:w-[75vw] lg:w-[65vw] max-w-[1200px] aspect-[16/9]"
             initial={{ y: 150, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -241,7 +241,7 @@ export function HeroSection() {
 
         {/* --- LAYER +2 (Closest Particles) --- */}
         <motion.div 
-          className="absolute inset-0 z-30 pointer-events-none"
+          className="absolute inset-0 z-30 pointer-events-none hidden md:block"
           style={{ x: layer2X, y: layer2Y }}
         >
           {[...Array(25)].map((_, i) => (
@@ -268,9 +268,9 @@ export function HeroSection() {
         </motion.div>
 
         {/* --- MAIN TEXT CONTENT (Left Aligned) --- */}
-        <div className="absolute inset-0 z-40 flex items-center pointer-events-none">
+        <div className="absolute inset-0 z-40 flex md:items-center items-start pt-[12vh] md:pt-0 pointer-events-none">
           <div className="container mx-auto px-6 lg:px-12 w-full flex">
-            <div className="w-full lg:w-1/2 flex flex-col items-start text-left pt-20 pointer-events-auto">
+            <div className="w-full lg:w-1/2 flex flex-col items-center md:items-start text-center md:text-left pointer-events-auto">
               
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
@@ -301,7 +301,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.9, ease: "easeOut" }}
-                className="text-white/60 font-sans text-lg md:text-xl max-w-md mb-12 leading-relaxed border-l-2 border-primary/50 pl-6"
+                className="text-white/60 font-sans text-sm md:text-xl max-w-md mb-8 md:mb-12 leading-relaxed border-l-0 md:border-l-2 md:border-primary/50 md:pl-6"
               >
                 Every bolt torqued. Every system optimized. Every car transformed into a weapon.
               </motion.p>
