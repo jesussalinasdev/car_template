@@ -160,16 +160,22 @@ export function HeroSection() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
-                WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, transparent 60%)',
-                maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, transparent 60%)' 
-              }}
-            >
-              <motion.img src="/assets/hero-car-front-34.png" className="absolute inset-0 w-full h-full object-contain" animate={{ opacity: oA }} transition={{ duration: 1 }} />
-              <motion.img src="/assets/hero-car-side.png" className="absolute inset-0 w-full h-full object-contain" animate={{ opacity: oB }} transition={{ duration: 1 }} />
-              <motion.img src="/assets/hero-car-rear-34.png" className="absolute inset-0 w-full h-full object-contain" animate={{ opacity: oC }} transition={{ duration: 1 }} />
-              <motion.img src="/assets/hero-car-front.png" className="absolute inset-0 w-full h-full object-contain" animate={{ opacity: oD }} transition={{ duration: 1 }} />
-            </div>
-
+            <AnimatePresence mode="popLayout">
+              <motion.img 
+                key={activeIndex}
+                src={["/assets/hero-car-front-34.png", "/assets/hero-car-side.png", "/assets/hero-car-rear-34.png", "/assets/hero-car-front.png"][activeIndex]} 
+                alt="Car" 
+                className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_30px_rgba(255,69,0,0.15)]"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }} 
+              />
+            </AnimatePresence>
+            
+            {/* Soft shadow underneath car */}
+            <div className="absolute -bottom-[5%] left-[20%] right-[20%] h-[15%] bg-black blur-2xl rounded-[100%] pointer-events-none" />
+            <div className="absolute -bottom-[5%] left-[25%] right-[25%] h-[10%] bg-primary/20 blur-3xl rounded-[100%] pointer-events-none" />
           </motion.div>
         </motion.div>
 
