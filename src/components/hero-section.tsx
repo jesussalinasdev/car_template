@@ -26,6 +26,26 @@ function useMouseParallax() {
   return { x: smoothX, y: smoothY };
 }
 
+function CarRotator() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % 4);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <>
+      <motion.img src="/assets/hero-car-front-34.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 0 ? 1 : 0 }} transition={{ duration: activeIndex === 0 ? 0.1 : 0.8 }} />
+      <motion.img src="/assets/hero-car-side.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 1 ? 1 : 0 }} transition={{ duration: activeIndex === 1 ? 0.1 : 0.8 }} />
+      <motion.img src="/assets/hero-car-rear-34.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 2 ? 1 : 0 }} transition={{ duration: activeIndex === 2 ? 0.1 : 0.8 }} />
+      <motion.img src="/assets/hero-car-front.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 3 ? 1 : 0 }} transition={{ duration: activeIndex === 3 ? 0.1 : 0.8 }} />
+    </>
+  );
+}
+
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -34,8 +54,6 @@ export function HeroSection() {
   });
 
   const { x: mouseX, y: mouseY } = useMouseParallax();
-
-  // Static image only (no rotation per user request)
 
   // Depth Parallax multipliers
   const layerMinus3X = useTransform(mouseX, [-0.5, 0.5], ["2%", "-2%"]);
@@ -59,11 +77,8 @@ export function HeroSection() {
   // HUD text updates based on scroll
   const currentSpeed = useTransform(scrollYProgress, [0, 1], [0, 212]);
   const currentRPM = useTransform(scrollYProgress, [0, 1], [1000, 8500]);
-  const [speed, setSpeed] = useState(0);
-  const [rpm, setRpm] = useState(1000);
-
-  useEffect(() => currentSpeed.on('change', v => setSpeed(Math.round(v))), [currentSpeed]);
-  useEffect(() => currentRPM.on('change', v => setRpm(Math.round(v))), [currentRPM]);
+  const speedText = useTransform(currentSpeed, (s) => Math.round(s).toString());
+  const rpmText = useTransform(currentRPM, (r) => Math.round(r).toString());
   return (
     <div ref={containerRef} className="relative w-full overflow-hidden bg-transparent md:h-[150vh]">
       <div className="relative md:sticky md:top-0 min-h-screen md:h-screen w-full overflow-hidden flex flex-col md:block md:items-center md:justify-center perspective-1000">
@@ -143,8 +158,8 @@ export function HeroSection() {
               </motion.svg>
             </div>
 
-            {/* Main Car Subject (Static) */}
-            <img src="/assets/hero-car-front-34.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none" />
+            {/* Isolated Car Rotator (Zero React re-renders in HeroSection) */}
+            <CarRotator />
             
             {/* Attached HUD Readouts */}
             <div className="absolute inset-0 z-20 pointer-events-none">
@@ -171,10 +186,10 @@ export function HeroSection() {
               {/* Speed/RPM Readout */}
               <div className="absolute top-[5%] left-[5%] md:top-auto md:bottom-[15%] md:-right-[5%] md:left-auto text-left md:text-right font-mono text-primary/90 block">
                 <div className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tighter drop-shadow-[0_0_15px_rgba(255,69,0,0.5)]">
-                  {speed} <span className="text-xs md:text-xl text-primary/50 tracking-normal">MPH</span>
+                  <motion.span>{speedText}</motion.span> <span className="text-xs md:text-xl text-primary/50 tracking-normal">MPH</span>
                 </div>
                 <div className="text-sm md:text-2xl lg:text-3xl mt-1 font-light opacity-80">
-                  {rpm} <span className="text-[10px] md:text-sm text-primary/50">RPM</span>
+                  <motion.span>{rpmText}</motion.span> <span className="text-[10px] md:text-sm text-primary/50">RPM</span>
                 </div>
                 
                 {/* Waveform fake */}
@@ -252,7 +267,7 @@ export function HeroSection() {
                 className="text-7xl md:text-8xl lg:text-9xl font-display font-bold uppercase leading-[0.85] tracking-tight mb-8"
               >
                 Built To<br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-500 to-primary text-shadow-glow block my-2">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-500 to-primary block my-2">
                   Dominate
                 </span>
                 The Track
