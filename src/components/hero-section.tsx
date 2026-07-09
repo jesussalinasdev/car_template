@@ -209,7 +209,7 @@ export function HeroSection() {
                 scale: [1, 1.5, 1],
               }}
               transition={{
-                duration: 2 + Math.random() * 3,
+                duration: 2 + ((i * 13) % 30) / 10,
                 repeat: Infinity,
                 ease: 'easeInOut'
               }}

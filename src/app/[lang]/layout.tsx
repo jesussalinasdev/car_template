@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Bebas_Neue } from "next/font/google";
 import "../globals.css";
-import { CustomCursor } from "@/components/ui/custom-cursor";
-
 const inter = Inter({ subsets: ["latin"], variable: "--app-font-sans" });
 const bebasNeue = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--app-font-display" });
 
@@ -25,8 +23,7 @@ export default async function RootLayout({
   const { lang } = await params;
   return (
     <html lang={lang} className={`dark ${inter.variable} ${bebasNeue.variable}`}>
-      <body className="bg-background text-foreground antialiased cursor-none">
-        <CustomCursor />
+      <body className="bg-background text-foreground antialiased">
         {children}
       </body>
     </html>
