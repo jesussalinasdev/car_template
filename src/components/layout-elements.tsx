@@ -45,7 +45,7 @@ export function CustomCursor() {
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 bg-primary rounded-full pointer-events-none z-[9999] mix-blend-screen custom-cursor-element"
+        className="fixed top-0 left-0 w-2 h-2 bg-primary rounded-full pointer-events-none z-[9999] mix-blend-screen custom-cursor-element hidden md:block"
         animate={{
           x: mousePosition.x - 4,
           y: mousePosition.y - 4,
@@ -54,7 +54,7 @@ export function CustomCursor() {
         transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
       />
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 border border-primary/50 rounded-full pointer-events-none z-[9998] flex items-center justify-center custom-cursor-element"
+        className="fixed top-0 left-0 w-8 h-8 border border-primary/50 rounded-full pointer-events-none z-[9998] hidden md:flex items-center justify-center custom-cursor-element"
         animate={{ 
           x: mousePosition.x - 16, 
           y: mousePosition.y - 16,
@@ -143,7 +143,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: '-100%' }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[55] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-start pt-32 gap-6 overflow-y-auto pb-10"
+            className="fixed top-0 left-0 w-screen h-[100dvh] z-[55] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8"
           >
             {['Services', 'Workshop', 'Team', 'Testimonials'].map((item, i) => (
               <motion.a
