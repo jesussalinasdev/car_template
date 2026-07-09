@@ -216,7 +216,7 @@ export function HeroSection() {
           </div>
 
           {/* Speed/RPM Readout */}
-          <div className="absolute bottom-[25%] right-[10%] text-right font-mono text-primary/90">
+          <div className="absolute bottom-[25%] right-[10%] text-right font-mono text-primary/90 hidden md:block">
             <div className="text-5xl lg:text-7xl font-bold tracking-tighter drop-shadow-[0_0_15px_rgba(255,69,0,0.5)]">
               {speed} <span className="text-xl text-primary/50 tracking-normal">MPH</span>
             </div>
@@ -276,10 +276,10 @@ export function HeroSection() {
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 1.5, ease: "easeOut" }}
-                className="mb-8 flex items-center gap-4"
+                className="mb-8 flex flex-col md:flex-row items-center justify-center md:justify-start w-full gap-4"
               >
-                <div className="h-[2px] w-12 bg-primary drop-shadow-[0_0_8px_rgba(255,69,0,0.8)]"></div>
-                <span className="text-primary font-sans font-bold tracking-[0.4em] uppercase text-xs md:text-sm drop-shadow-[0_0_8px_rgba(255,69,0,0.5)]">
+                <div className="h-[2px] w-12 bg-primary drop-shadow-[0_0_8px_rgba(255,69,0,0.8)] hidden md:block"></div>
+                <span className="text-primary font-sans font-bold tracking-[0.2em] md:tracking-[0.4em] uppercase text-xs md:text-sm drop-shadow-[0_0_8px_rgba(255,69,0,0.5)] text-center md:text-left">
                   Apex Motors / Elite Performance
                 </span>
               </motion.div>

@@ -11,7 +11,7 @@ export function BookingSection() {
       </div>
 
       <div className="max-w-5xl mx-auto px-6 relative z-10">
-        <div className="bg-neutral-900/50 backdrop-blur-md border border-neutral-800 p-10 md:p-16 clip-diagonal relative group">
+        <div className="bg-neutral-900/50 backdrop-blur-md border border-neutral-800 p-6 md:p-16 clip-diagonal relative group">
           
           {/* Animated border line on hover */}
           <div className="absolute top-0 left-0 w-0 h-[2px] bg-primary transition-all duration-700 ease-in-out group-hover:w-full" />
