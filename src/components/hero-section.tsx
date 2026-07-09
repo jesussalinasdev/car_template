@@ -157,10 +157,10 @@ export function HeroSection() {
             </div>
 
             {/* Pre-rendered layers (Zero flicker crossfade) */}
-            <motion.img src="/assets/hero-car-front-34.png" alt="Car" className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_30px_rgba(255,69,0,0.15)] pointer-events-none" animate={{ opacity: activeIndex === 0 ? 1 : 0 }} transition={{ duration: 0.6 }} />
-            <motion.img src="/assets/hero-car-side.png" alt="Car" className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_30px_rgba(255,69,0,0.15)] pointer-events-none" animate={{ opacity: activeIndex === 1 ? 1 : 0 }} transition={{ duration: 0.6 }} />
-            <motion.img src="/assets/hero-car-rear-34.png" alt="Car" className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_30px_rgba(255,69,0,0.15)] pointer-events-none" animate={{ opacity: activeIndex === 2 ? 1 : 0 }} transition={{ duration: 0.6 }} />
-            <motion.img src="/assets/hero-car-front.png" alt="Car" className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_30px_rgba(255,69,0,0.15)] pointer-events-none" animate={{ opacity: activeIndex === 3 ? 1 : 0 }} transition={{ duration: 0.6 }} />
+            <motion.img src="/assets/hero-car-front-34.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 0 ? 1 : 0 }} transition={{ duration: 0.6 }} />
+            <motion.img src="/assets/hero-car-side.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 1 ? 1 : 0 }} transition={{ duration: 0.6 }} />
+            <motion.img src="/assets/hero-car-rear-34.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 2 ? 1 : 0 }} transition={{ duration: 0.6 }} />
+            <motion.img src="/assets/hero-car-front.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 3 ? 1 : 0 }} transition={{ duration: 0.6 }} />
             
             {/* Attached HUD Readouts */}
             <div className="absolute inset-0 z-20 pointer-events-none">
