@@ -128,26 +128,7 @@ export function HeroSection() {
           </svg>
         </motion.div>
 
-        {/* --- LAYER -1 (Floating Mechanical SVGs) --- */}
-        <motion.div className="absolute inset-0 z-0 pointer-events-none hidden md:block" style={{ x: layerMinus1X, y: layerMinus1Y }}>
-          {/* Gear 1 */}
-          <motion.svg className="absolute top-[20%] right-[15%] w-32 h-32 text-primary/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"
-            animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }}>
-            <path d="M12 2v4m0 12v4M2 12h4m12 0h4m-3.5-7.5l-2.8 2.8m-7.4 7.4l-2.8 2.8m13-10.2l-2.8-2.8M6.3 17.7l-2.8-2.8" />
-            <circle cx="12" cy="12" r="4" />
-          </motion.svg>
-          {/* Gear 2 */}
-          <motion.svg className="absolute bottom-[30%] left-[40%] w-48 h-48 text-primary/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"
-            animate={{ rotate: -360 }} transition={{ duration: 60, repeat: Infinity, ease: "linear" }}>
-            <path d="M12 2v4m0 12v4M2 12h4m12 0h4m-3.5-7.5l-2.8 2.8m-7.4 7.4l-2.8 2.8m13-10.2l-2.8-2.8M6.3 17.7l-2.8-2.8" />
-            <circle cx="12" cy="12" r="6" />
-          </motion.svg>
-          {/* Wrench */}
-          <motion.svg className="absolute top-[40%] left-[10%] w-24 h-24 text-primary/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"
-            animate={{ rotate: [0, 15, -15, 0] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}>
-            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-          </motion.svg>
-        </motion.div>
+
 
         {/* --- LAYER 0 (Main Car Subject) --- */}
         <motion.div 
@@ -160,6 +141,21 @@ export function HeroSection() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
+            {/* Attached Background Mechanicals */}
+            <div className="absolute inset-0 z-[-1] pointer-events-none opacity-40 md:opacity-100">
+              <motion.svg className="absolute -top-[5%] right-[5%] md:top-[10%] md:right-[0%] w-20 h-20 md:w-32 md:h-32 text-primary/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }}>
+                <path d="M12 2v4m0 12v4M2 12h4m12 0h4m-3.5-7.5l-2.8 2.8m-7.4 7.4l-2.8 2.8m13-10.2l-2.8-2.8M6.3 17.7l-2.8-2.8" />
+                <circle cx="12" cy="12" r="4" />
+              </motion.svg>
+              <motion.svg className="absolute -bottom-[5%] left-[20%] md:bottom-[10%] md:left-[25%] w-32 h-32 md:w-48 md:h-48 text-primary/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" animate={{ rotate: -360 }} transition={{ duration: 60, repeat: Infinity, ease: "linear" }}>
+                <path d="M12 2v4m0 12v4M2 12h4m12 0h4m-3.5-7.5l-2.8 2.8m-7.4 7.4l-2.8 2.8m13-10.2l-2.8-2.8M6.3 17.7l-2.8-2.8" />
+                <circle cx="12" cy="12" r="6" />
+              </motion.svg>
+              <motion.svg className="absolute top-[20%] left-[10%] md:top-[30%] md:left-[10%] w-16 h-16 md:w-24 md:h-24 text-primary/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" animate={{ rotate: [0, 15, -15, 0] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}>
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+              </motion.svg>
+            </div>
+
             <AnimatePresence mode="popLayout">
               <motion.img 
                 key={activeIndex}
@@ -173,67 +169,63 @@ export function HeroSection() {
               />
             </AnimatePresence>
             
+            {/* Attached HUD Readouts */}
+            <div className="absolute inset-0 z-20 pointer-events-none">
+              {/* HUD Line Right */}
+              <div className="absolute top-[20%] right-[10%] md:top-[25%] md:-right-[10%] w-[25vw] md:w-[15vw] border-b border-primary/40 block">
+                <div className="absolute -top-4 right-0 text-primary font-mono text-[8px] md:text-[10px] tracking-widest uppercase">
+                  V12 Biturbo // 720 HP
+                </div>
+                <div className="absolute -left-1.5 -bottom-1.5 w-3 h-3 border border-primary rounded-full bg-black flex items-center justify-center">
+                  <div className="w-1 h-1 bg-primary rounded-full" />
+                </div>
+              </div>
+
+              {/* HUD Line Left */}
+              <div className="absolute bottom-[25%] left-[5%] md:bottom-[25%] md:-left-[10%] w-[20vw] md:w-[12vw] border-b border-primary/40 block origin-left -rotate-12">
+                <div className="absolute -top-4 left-0 text-primary font-mono text-[8px] md:text-[10px] tracking-widest uppercase">
+                  Aero Force // 1200kg
+                </div>
+                <div className="absolute -right-1.5 -bottom-1.5 w-3 h-3 border border-primary rounded-full bg-black flex items-center justify-center">
+                  <div className="w-1 h-1 bg-primary rounded-full" />
+                </div>
+              </div>
+
+              {/* Speed/RPM Readout */}
+              <div className="absolute bottom-[10%] right-[10%] md:bottom-[15%] md:-right-[5%] text-right font-mono text-primary/90 block">
+                <div className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tighter drop-shadow-[0_0_15px_rgba(255,69,0,0.5)]">
+                  {speed} <span className="text-xs md:text-xl text-primary/50 tracking-normal">MPH</span>
+                </div>
+                <div className="text-sm md:text-2xl lg:text-3xl mt-1 font-light opacity-80">
+                  {rpm} <span className="text-[10px] md:text-sm text-primary/50">RPM</span>
+                </div>
+                
+                {/* Waveform fake */}
+                <div className="flex items-end justify-end gap-1 h-4 md:h-8 mt-2 md:mt-4">
+                  {[...Array(12)].map((_, i) => (
+                    <motion.div 
+                      key={i}
+                      className="w-1 md:w-1.5 bg-primary/70"
+                      animate={{ height: ['20%', '100%', '20%'] }}
+                      transition={{ duration: 0.5 + Math.random(), repeat: Infinity, ease: 'easeInOut', delay: Math.random() }}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
             {/* Soft shadow underneath car */}
             <div className="absolute -bottom-[5%] left-[20%] right-[20%] h-[15%] bg-black blur-2xl rounded-[100%] pointer-events-none" />
             <div className="absolute -bottom-[5%] left-[25%] right-[25%] h-[10%] bg-primary/20 blur-3xl rounded-[100%] pointer-events-none" />
           </motion.div>
         </motion.div>
 
-        {/* --- LAYER +1 (HUD / Readouts) --- */}
-        <motion.div 
-          className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center"
-          style={{ x: layer1X, y: layer1Y }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
-        >
-          {/* HUD Line Right */}
-          <div className="absolute top-[35%] right-[20%] w-[15vw] border-b border-primary/40 hidden lg:block">
-            <div className="absolute -top-5 right-0 text-primary font-mono text-[10px] tracking-widest uppercase">
-              V12 Biturbo // 720 HP
-            </div>
-            <div className="absolute -left-1.5 -bottom-1.5 w-3 h-3 border border-primary rounded-full bg-black flex items-center justify-center">
-              <div className="w-1 h-1 bg-primary rounded-full" />
-            </div>
-          </div>
 
-          {/* HUD Line Left */}
-          <div className="absolute bottom-[35%] right-[55%] w-[12vw] border-b border-primary/40 hidden lg:block origin-left -rotate-12">
-            <div className="absolute -top-5 left-0 text-primary font-mono text-[10px] tracking-widest uppercase">
-              Aero Force // 1200kg
-            </div>
-            <div className="absolute -right-1.5 -bottom-1.5 w-3 h-3 border border-primary rounded-full bg-black flex items-center justify-center">
-              <div className="w-1 h-1 bg-primary rounded-full" />
-            </div>
-          </div>
-
-          {/* Speed/RPM Readout */}
-          <div className="absolute bottom-[25%] right-[10%] text-right font-mono text-primary/90 hidden md:block">
-            <div className="text-5xl lg:text-7xl font-bold tracking-tighter drop-shadow-[0_0_15px_rgba(255,69,0,0.5)]">
-              {speed} <span className="text-xl text-primary/50 tracking-normal">MPH</span>
-            </div>
-            <div className="text-2xl lg:text-3xl mt-1 font-light opacity-80">
-              {rpm} <span className="text-sm text-primary/50">RPM</span>
-            </div>
-            
-            {/* Waveform fake */}
-            <div className="flex items-end justify-end gap-1 h-8 mt-4">
-              {[...Array(12)].map((_, i) => (
-                <motion.div 
-                  key={i}
-                  className="w-1.5 bg-primary/70"
-                  animate={{ height: ['20%', '100%', '20%'] }}
-                  transition={{ duration: 0.5 + Math.random(), repeat: Infinity, ease: 'easeInOut', delay: Math.random() }}
-                />
-              ))}
-            </div>
-          </div>
-        </motion.div>
 
 
         {/* --- LAYER +2 (Closest Particles) --- */}
         <motion.div 
-          className="absolute inset-0 z-30 pointer-events-none hidden md:block"
+          className="absolute inset-0 z-30 pointer-events-none opacity-50 md:opacity-100"
           style={{ x: layer2X, y: layer2Y }}
         >
           {[...Array(25)].map((_, i) => (
