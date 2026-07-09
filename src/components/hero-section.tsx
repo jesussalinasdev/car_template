@@ -109,7 +109,7 @@ export function HeroSection() {
 
         {/* Spotlight */}
         <motion.div 
-          className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[80vw] h-[80vh] rounded-full pointer-events-none mix-blend-screen z-0"
+          className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[80vw] h-[80vh] rounded-full pointer-events-none z-0"
           style={{ background: 'radial-gradient(circle, rgba(255,69,0,0.15) 0%, transparent 70%)' }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -206,9 +206,9 @@ export function HeroSection() {
               </div>
             </div>
 
-            {/* Soft shadow underneath car */}
-            <div className="absolute -bottom-[5%] left-[20%] right-[20%] h-[15%] bg-black blur-2xl rounded-[100%] pointer-events-none" />
-            <div className="absolute -bottom-[5%] left-[25%] right-[25%] h-[10%] bg-primary/20 blur-3xl rounded-[100%] pointer-events-none" />
+            {/* Soft shadow underneath car (Optimized for Mobile GPU) */}
+            <div className="absolute -bottom-[10%] left-[15%] right-[15%] h-[25%] pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.8) 0%, transparent 70%)' }} />
+            <div className="absolute -bottom-[5%] left-[20%] right-[20%] h-[20%] pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, rgba(255,69,0,0.15) 0%, transparent 70%)' }} />
           </motion.div>
         </motion.div>
 
@@ -223,7 +223,7 @@ export function HeroSection() {
           {[...Array(25)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-1.5 h-1.5 bg-primary rounded-full blur-[1px]"
+              className="absolute w-1.5 h-1.5 bg-primary rounded-full"
               style={{
                 left: `${(i * 13.7) % 100}%`,
                 top: `${(i * 23.4) % 100}%`,
