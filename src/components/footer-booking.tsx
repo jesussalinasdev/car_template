@@ -3,13 +3,7 @@ import { motion } from 'framer-motion';
 
 export function BookingSection() {
   return (
-    <section className="py-32 relative bg-black overflow-hidden">
-      {/* Arc weld / spark particle effects layer in background */}
-      <div className="absolute inset-0 pointer-events-none opacity-30">
-        <div className="absolute top-0 right-[20%] w-[1px] h-full bg-gradient-to-b from-transparent via-primary/50 to-transparent shadow-[0_0_20px_rgba(255,69,0,1)]" />
-        <div className="absolute top-1/4 right-[25%] w-2 h-2 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,1),_0_0_40px_rgba(255,69,0,1)] animate-pulse" />
-      </div>
-
+    <section className="py-32 relative bg-transparent overflow-hidden">
       <div className="max-w-5xl mx-auto px-6 relative z-10">
         <div className="bg-neutral-900/50 backdrop-blur-md border border-neutral-800 p-6 md:p-16 clip-diagonal relative group">
           
@@ -83,7 +77,7 @@ export function BookingSection() {
 
 export function Footer() {
   return (
-    <footer className="bg-black border-t border-neutral-900 pt-20 pb-10">
+    <footer className="bg-black/50 border-t border-neutral-900 pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-2">

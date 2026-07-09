@@ -18,7 +18,7 @@ export function WorkshopSection() {
     <section
       id="workshop"
       ref={containerRef}
-      className="relative min-h-screen md:h-[140vh] w-full bg-black overflow-hidden flex flex-col md:block pb-24 md:pb-0"
+      className="relative min-h-screen md:h-[140vh] w-full bg-transparent overflow-hidden flex flex-col md:block pb-24 md:pb-0"
     >
       {/* Parallax background */}
       <motion.div className="absolute inset-0 z-0" style={{ y: yBg }}>

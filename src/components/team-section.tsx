@@ -19,7 +19,7 @@ const legends = [
 
 export function TeamSection() {
   return (
-    <section id="team" className="py-32 bg-black relative">
+    <section id="team" className="py-32 bg-transparent relative">
       <div className="max-w-7xl mx-auto px-6">
         
         <div className="text-center mb-24">
@@ -95,7 +95,7 @@ const testimonials = [
 
 export function TestimonialsSection() {
   return (
-    <section id="testimonials" className="py-32 bg-neutral-950 relative border-t border-neutral-900 overflow-hidden">
+    <section id="testimonials" className="py-32 bg-transparent relative border-t border-neutral-900/50 overflow-hidden">
       {/* Giant subtle text background */}
       <div className="absolute top-1/2 -translate-y-1/2 left-0 whitespace-nowrap text-[15rem] md:text-[20rem] font-display font-bold text-neutral-900/40 pointer-events-none select-none z-0 tracking-tighter">
         NO COMPROMISE

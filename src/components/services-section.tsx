@@ -125,7 +125,7 @@ export function ServicesSection() {
   const titleY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   
   return (
-    <section id="services" ref={containerRef} className="relative py-32 bg-background overflow-hidden">
+    <section id="services" ref={containerRef} className="py-32 bg-transparent relative z-10">
       {/* Background elements */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-neutral-800 to-transparent" />
       

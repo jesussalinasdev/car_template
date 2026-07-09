@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
 export function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -77,6 +77,7 @@ export function CustomCursor() {
 }
 
 export function Navbar() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
   const backgroundColor = useTransform(
     scrollY,
@@ -124,12 +125,51 @@ export function Navbar() {
         <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
       </button>
 
-      {/* Mobile menu toggle would go here */}
-      <button className="md:hidden flex flex-col gap-1.5 p-2">
-        <div className="w-6 h-0.5 bg-white" />
-        <div className="w-6 h-0.5 bg-white" />
-        <div className="w-4 h-0.5 bg-primary self-end" />
+      {/* Mobile menu toggle */}
+      <button 
+        className="md:hidden flex flex-col justify-center gap-1.5 p-2 z-[60] relative"
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+      >
+        <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+        <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
+        <div className={`w-6 h-0.5 transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2 bg-white' : 'bg-primary w-4 self-end'}`} />
       </button>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: '-100%' }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: '-100%' }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-[55] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8"
+          >
+            {['Services', 'Workshop', 'Team', 'Testimonials'].map((item, i) => (
+              <motion.a
+                key={item}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + i * 0.1 }}
+                href={`#${item.toLowerCase()}`}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-3xl font-display uppercase tracking-widest text-white hover:text-primary transition-colors"
+              >
+                {item}
+              </motion.a>
+            ))}
+            <motion.button 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="mt-8 px-8 py-4 border border-primary text-primary font-display tracking-widest uppercase hover:bg-primary hover:text-black transition-all clip-diagonal"
+            >
+              Ignition
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 }

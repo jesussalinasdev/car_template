@@ -78,7 +78,7 @@ export function HeroSection() {
   useEffect(() => currentRPM.on('change', v => setRpm(Math.round(v))), [currentRPM]);
 
   return (
-    <div ref={containerRef} className="relative w-full overflow-hidden bg-black h-[150vh]">
+    <div ref={containerRef} className="relative w-full overflow-hidden bg-transparent h-[150vh]">
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center perspective-1000">
         
         {/* INITIAL SCAN LINE */}
@@ -151,7 +151,7 @@ export function HeroSection() {
 
         {/* --- LAYER 0 (Main Car Subject) --- */}
         <motion.div 
-          className="absolute inset-0 flex items-center justify-center md:justify-end md:pr-[5vw] lg:pr-[10vw] z-10 pointer-events-none pt-[35vh] md:pt-0"
+          className="absolute inset-0 flex items-end pb-[12vh] md:pb-0 md:items-center justify-center md:justify-end md:pr-[5vw] lg:pr-[10vw] z-10 pointer-events-none"
           style={{ x: layer0X, y: layer0Y }}
         >
           <motion.div 
@@ -160,20 +160,6 @@ export function HeroSection() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* The 4 rotating images */}
-            <motion.img src="/assets/hero-car-front-34.png" alt="Car Front 3/4" className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_30px_rgba(255,69,0,0.15)]" animate={{ opacity: oA }} transition={{ duration: 1 }} />
-            <motion.img src="/assets/hero-car-side.png" alt="Car Side" className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_30px_rgba(255,69,0,0.15)]" animate={{ opacity: oB }} transition={{ duration: 1 }} />
-            <motion.img src="/assets/hero-car-rear-34.png" alt="Car Rear 3/4" className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_30px_rgba(255,69,0,0.15)]" animate={{ opacity: oC }} transition={{ duration: 1 }} />
-            <motion.img src="/assets/hero-car-front.png" alt="Car Front" className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_30px_rgba(255,69,0,0.15)]" animate={{ opacity: oD }} transition={{ duration: 1 }} />
-            
-            {/* Floor shadow glow */}
-            <div className="absolute -bottom-[5%] left-[20%] right-[20%] h-[15%] bg-black blur-2xl rounded-[100%]" />
-            <div className="absolute -bottom-[5%] left-[25%] right-[25%] h-[10%] bg-primary/20 blur-3xl rounded-[100%]" />
-            
-            {/* CSS Reflection */}
-            <div 
-              className="absolute top-[85%] left-0 w-full h-[60%] scale-y-[-1] opacity-40 pointer-events-none"
-              style={{ 
                 WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, transparent 60%)',
                 maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, transparent 60%)' 
               }}
