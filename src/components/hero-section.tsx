@@ -1,0 +1,357 @@
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+
+
+
+
+
+
+// Hook for mouse position relative to center, returned as -0.5 to 0.5
+function useMouseParallax() {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      x.set((e.clientX / window.innerWidth) - 0.5);
+      y.set((e.clientY / window.innerHeight) - 0.5);
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [x, y]);
+
+  const smoothX = useSpring(x, { stiffness: 600, damping: 40, mass: 0.3 });
+  const smoothY = useSpring(y, { stiffness: 600, damping: 40, mass: 0.3 });
+
+  return { x: smoothX, y: smoothY };
+}
+
+export function HeroSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"] 
+  });
+
+  const { x: mouseX, y: mouseY } = useMouseParallax();
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % 4);
+    }, 3500); // Cambia de imagen cada 3.5 segundos
+    return () => clearInterval(interval);
+  }, []);
+
+  const oA = activeIndex === 0 ? 1 : 0;
+  const oB = activeIndex === 1 ? 1 : 0;
+  const oC = activeIndex === 2 ? 1 : 0;
+  const oD = activeIndex === 3 ? 1 : 0;
+
+  // Depth Parallax multipliers
+  const layerMinus3X = useTransform(mouseX, [-0.5, 0.5], ["2%", "-2%"]);
+  const layerMinus3Y = useTransform(mouseY, [-0.5, 0.5], ["2%", "-2%"]);
+  
+  const layerMinus2X = useTransform(mouseX, [-0.5, 0.5], ["4%", "-4%"]);
+  const layerMinus2Y = useTransform(mouseY, [-0.5, 0.5], ["4%", "-4%"]);
+
+  const layerMinus1X = useTransform(mouseX, [-0.5, 0.5], ["8%", "-8%"]);
+  const layerMinus1Y = useTransform(mouseY, [-0.5, 0.5], ["8%", "-8%"]);
+
+  const layer0X = useTransform(mouseX, [-0.5, 0.5], ["3%", "-3%"]);
+  const layer0Y = useTransform(mouseY, [-0.5, 0.5], ["3%", "-3%"]);
+
+  const layer1X = useTransform(mouseX, [-0.5, 0.5], ["-8%", "8%"]);
+  const layer1Y = useTransform(mouseY, [-0.5, 0.5], ["-8%", "8%"]);
+
+  const layer2X = useTransform(mouseX, [-0.5, 0.5], ["-15%", "15%"]);
+  const layer2Y = useTransform(mouseY, [-0.5, 0.5], ["-15%", "15%"]);
+
+  // HUD text updates based on scroll
+  const currentSpeed = useTransform(scrollYProgress, [0, 1], [0, 212]);
+  const currentRPM = useTransform(scrollYProgress, [0, 1], [1000, 8500]);
+  const [speed, setSpeed] = useState(0);
+  const [rpm, setRpm] = useState(1000);
+
+  useEffect(() => currentSpeed.on('change', v => setSpeed(Math.round(v))), [currentSpeed]);
+  useEffect(() => currentRPM.on('change', v => setRpm(Math.round(v))), [currentRPM]);
+
+  return (
+    <div ref={containerRef} className="relative w-full bg-black h-[250vh]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center perspective-1000">
+        
+        {/* INITIAL SCAN LINE */}
+        <motion.div 
+          className="absolute left-0 w-full h-[2px] bg-primary z-50 shadow-[0_0_20px_#FF4500]"
+          initial={{ top: "-10%" }}
+          animate={{ top: "110%" }}
+          transition={{ duration: 1.5, ease: "linear", delay: 0.2 }}
+        />
+
+        {/* --- LAYER -3 (Background / Grid) --- */}
+        <motion.div 
+          className="absolute inset-0 z-0 opacity-30 pointer-events-none"
+          style={{ x: layerMinus3X, y: layerMinus3Y }}
+        >
+          <div 
+            className="absolute inset-0"
+            style={{ 
+              backgroundImage: `linear-gradient(rgba(255, 69, 0, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 69, 0, 0.1) 1px, transparent 1px)`,
+              backgroundSize: '80px 80px',
+              transform: 'perspective(1000px) rotateX(60deg) scale(2.5) translateY(-20%)',
+              transformOrigin: 'top center'
+            }}
+          />
+        </motion.div>
+
+        {/* Spotlight */}
+        <motion.div 
+          className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[80vw] h-[80vh] rounded-full pointer-events-none mix-blend-screen z-0"
+          style={{ background: 'radial-gradient(circle, rgba(255,69,0,0.15) 0%, transparent 70%)' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+        />
+
+        {/* --- LAYER -2 (Large Blueprint Rings) --- */}
+        <motion.div 
+          className="absolute inset-0 z-0 flex items-center justify-center opacity-10 pointer-events-none"
+          style={{ x: layerMinus2X, y: layerMinus2Y }}
+        >
+          <svg viewBox="0 0 1000 1000" className="w-[150vw] h-[150vw] max-w-[1500px] max-h-[1500px] animate-[spin_120s_linear_infinite]">
+            <circle cx="500" cy="500" r="400" fill="none" stroke="#FF4500" strokeWidth="2" strokeDasharray="10 20" />
+            <circle cx="500" cy="500" r="350" fill="none" stroke="#FF4500" strokeWidth="1" strokeDasharray="5 5" />
+            <circle cx="500" cy="500" r="450" fill="none" stroke="#FF4500" strokeWidth="0.5" />
+            <line x1="100" y1="500" x2="900" y2="500" stroke="#FF4500" strokeWidth="1" />
+            <line x1="500" y1="100" x2="500" y2="900" stroke="#FF4500" strokeWidth="1" />
+          </svg>
+        </motion.div>
+
+        {/* --- LAYER -1 (Floating Mechanical SVGs) --- */}
+        <motion.div className="absolute inset-0 z-0 pointer-events-none" style={{ x: layerMinus1X, y: layerMinus1Y }}>
+          {/* Gear 1 */}
+          <motion.svg className="absolute top-[20%] right-[15%] w-32 h-32 text-primary/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"
+            animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }}>
+            <path d="M12 2v4m0 12v4M2 12h4m12 0h4m-3.5-7.5l-2.8 2.8m-7.4 7.4l-2.8 2.8m13-10.2l-2.8-2.8M6.3 17.7l-2.8-2.8" />
+            <circle cx="12" cy="12" r="4" />
+          </motion.svg>
+          {/* Gear 2 */}
+          <motion.svg className="absolute bottom-[30%] left-[40%] w-48 h-48 text-primary/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"
+            animate={{ rotate: -360 }} transition={{ duration: 60, repeat: Infinity, ease: "linear" }}>
+            <path d="M12 2v4m0 12v4M2 12h4m12 0h4m-3.5-7.5l-2.8 2.8m-7.4 7.4l-2.8 2.8m13-10.2l-2.8-2.8M6.3 17.7l-2.8-2.8" />
+            <circle cx="12" cy="12" r="6" />
+          </motion.svg>
+          {/* Wrench */}
+          <motion.svg className="absolute top-[40%] left-[10%] w-24 h-24 text-primary/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"
+            animate={{ rotate: [0, 15, -15, 0] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}>
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+          </motion.svg>
+        </motion.div>
+
+        {/* --- LAYER 0 (Main Car Subject) --- */}
+        <motion.div 
+          className="absolute inset-0 flex items-center justify-end pr-[5vw] lg:pr-[10vw] z-10 pointer-events-none"
+          style={{ x: layer0X, y: layer0Y }}
+        >
+          <motion.div 
+            className="relative w-[85vw] md:w-[75vw] lg:w-[65vw] max-w-[1200px] aspect-[16/9]"
+            initial={{ y: 150, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {/* The 4 rotating images */}
+            <motion.img src="/assets/hero-car-front-34.png" alt="Car Front 3/4" className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_30px_rgba(255,69,0,0.15)]" animate={{ opacity: oA }} transition={{ duration: 1 }} />
+            <motion.img src="/assets/hero-car-side.png" alt="Car Side" className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_30px_rgba(255,69,0,0.15)]" animate={{ opacity: oB }} transition={{ duration: 1 }} />
+            <motion.img src="/assets/hero-car-rear-34.png" alt="Car Rear 3/4" className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_30px_rgba(255,69,0,0.15)]" animate={{ opacity: oC }} transition={{ duration: 1 }} />
+            <motion.img src="/assets/hero-car-front.png" alt="Car Front" className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_30px_rgba(255,69,0,0.15)]" animate={{ opacity: oD }} transition={{ duration: 1 }} />
+            
+            {/* Floor shadow glow */}
+            <div className="absolute -bottom-[5%] left-[20%] right-[20%] h-[15%] bg-black blur-2xl rounded-[100%]" />
+            <div className="absolute -bottom-[5%] left-[25%] right-[25%] h-[10%] bg-primary/20 blur-3xl rounded-[100%]" />
+            
+            {/* CSS Reflection */}
+            <div 
+              className="absolute top-[85%] left-0 w-full h-[60%] scale-y-[-1] opacity-40 pointer-events-none"
+              style={{ 
+                WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, transparent 60%)',
+                maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, transparent 60%)' 
+              }}
+            >
+              <motion.img src="/assets/hero-car-front-34.png" className="absolute inset-0 w-full h-full object-contain" animate={{ opacity: oA }} transition={{ duration: 1 }} />
+              <motion.img src="/assets/hero-car-side.png" className="absolute inset-0 w-full h-full object-contain" animate={{ opacity: oB }} transition={{ duration: 1 }} />
+              <motion.img src="/assets/hero-car-rear-34.png" className="absolute inset-0 w-full h-full object-contain" animate={{ opacity: oC }} transition={{ duration: 1 }} />
+              <motion.img src="/assets/hero-car-front.png" className="absolute inset-0 w-full h-full object-contain" animate={{ opacity: oD }} transition={{ duration: 1 }} />
+            </div>
+
+          </motion.div>
+        </motion.div>
+
+        {/* --- LAYER +1 (HUD / Readouts) --- */}
+        <motion.div 
+          className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center"
+          style={{ x: layer1X, y: layer1Y }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.5 }}
+        >
+          {/* HUD Line Right */}
+          <div className="absolute top-[35%] right-[20%] w-[15vw] border-b border-primary/40 hidden lg:block">
+            <div className="absolute -top-5 right-0 text-primary font-mono text-[10px] tracking-widest uppercase">
+              V12 Biturbo // 720 HP
+            </div>
+            <div className="absolute -left-1.5 -bottom-1.5 w-3 h-3 border border-primary rounded-full bg-black flex items-center justify-center">
+              <div className="w-1 h-1 bg-primary rounded-full" />
+            </div>
+          </div>
+
+          {/* HUD Line Left */}
+          <div className="absolute bottom-[35%] right-[55%] w-[12vw] border-b border-primary/40 hidden lg:block origin-left -rotate-12">
+            <div className="absolute -top-5 left-0 text-primary font-mono text-[10px] tracking-widest uppercase">
+              Aero Force // 1200kg
+            </div>
+            <div className="absolute -right-1.5 -bottom-1.5 w-3 h-3 border border-primary rounded-full bg-black flex items-center justify-center">
+              <div className="w-1 h-1 bg-primary rounded-full" />
+            </div>
+          </div>
+
+          {/* Speed/RPM Readout */}
+          <div className="absolute bottom-[25%] right-[10%] text-right font-mono text-primary/90">
+            <div className="text-5xl lg:text-7xl font-bold tracking-tighter drop-shadow-[0_0_15px_rgba(255,69,0,0.5)]">
+              {speed} <span className="text-xl text-primary/50 tracking-normal">MPH</span>
+            </div>
+            <div className="text-2xl lg:text-3xl mt-1 font-light opacity-80">
+              {rpm} <span className="text-sm text-primary/50">RPM</span>
+            </div>
+            
+            {/* Waveform fake */}
+            <div className="flex items-end justify-end gap-1 h-8 mt-4">
+              {[...Array(12)].map((_, i) => (
+                <motion.div 
+                  key={i}
+                  className="w-1.5 bg-primary/70"
+                  animate={{ height: ['20%', '100%', '20%'] }}
+                  transition={{ duration: 0.5 + Math.random(), repeat: Infinity, ease: 'easeInOut', delay: Math.random() }}
+                />
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+
+        {/* --- LAYER +2 (Closest Particles) --- */}
+        <motion.div 
+          className="absolute inset-0 z-30 pointer-events-none"
+          style={{ x: layer2X, y: layer2Y }}
+        >
+          {[...Array(25)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1.5 h-1.5 bg-primary rounded-full blur-[1px]"
+              style={{
+                left: `${(i * 13.7) % 100}%`,
+                top: `${(i * 23.4) % 100}%`,
+                opacity: ((i * 7) % 50) / 100 + 0.2
+              }}
+              animate={{
+                y: [0, -30, 0],
+                x: [0, (i % 2 === 0 ? 7.5 : -7.5), 0],
+                scale: [1, 1.5, 1],
+              }}
+              transition={{
+                duration: 2 + Math.random() * 3,
+                repeat: Infinity,
+                ease: 'easeInOut'
+              }}
+            />
+          ))}
+        </motion.div>
+
+        {/* --- MAIN TEXT CONTENT (Left Aligned) --- */}
+        <div className="absolute inset-0 z-40 flex items-center pointer-events-none">
+          <div className="container mx-auto px-6 lg:px-12 w-full flex">
+            <div className="w-full lg:w-1/2 flex flex-col items-start text-left pt-20 pointer-events-auto">
+              
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 1.5, ease: "easeOut" }}
+                className="mb-8 flex items-center gap-4"
+              >
+                <div className="h-[2px] w-12 bg-primary drop-shadow-[0_0_8px_rgba(255,69,0,0.8)]"></div>
+                <span className="text-primary font-sans font-bold tracking-[0.4em] uppercase text-xs md:text-sm drop-shadow-[0_0_8px_rgba(255,69,0,0.5)]">
+                  Apex Motors / Elite Performance
+                </span>
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 1.7, ease: "easeOut" }}
+                className="text-7xl md:text-8xl lg:text-9xl font-display font-bold uppercase leading-[0.85] tracking-tight mb-8"
+              >
+                Built To<br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-500 to-primary text-shadow-glow block my-2">
+                  Dominate
+                </span>
+                The Track
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.9, ease: "easeOut" }}
+                className="text-white/60 font-sans text-lg md:text-xl max-w-md mb-12 leading-relaxed border-l-2 border-primary/50 pl-6"
+              >
+                Every bolt torqued. Every system optimized. Every car transformed into a weapon.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 2.1, ease: "easeOut" }}
+              >
+                <button className="group relative px-12 py-5 bg-transparent border border-primary/50 text-white font-display text-2xl uppercase tracking-widest clip-diagonal overflow-hidden transition-all hover:border-primary">
+                  <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
+                  <span className="relative z-10 flex items-center gap-4 group-hover:text-black transition-colors">
+                    Ignition
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-2 transition-transform">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </span>
+                </button>
+              </motion.div>
+
+            </div>
+          </div>
+        </div>
+
+        {/* --- BOTTOM CENTER SPEC BAR --- */}
+        <motion.div 
+          className="absolute bottom-0 left-0 w-full bg-black/80 backdrop-blur-md border-t border-primary/20 overflow-hidden z-50 h-16 flex items-center"
+          initial={{ y: "100%" }}
+          animate={{ y: "0%" }}
+          transition={{ duration: 0.8, delay: 2.3, ease: "easeOut" }}
+        >
+          <motion.div 
+            className="flex whitespace-nowrap text-xs md:text-sm font-sans font-bold tracking-[0.2em] uppercase text-white/50"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 20, ease: "linear", repeat: Infinity }}
+          >
+            {[...Array(4)].map((_, i) => (
+              <span key={i} className="flex items-center">
+                <span className="mx-8 text-primary drop-shadow-[0_0_5px_rgba(255,69,0,0.8)]">·</span> ENGINE TUNING
+                <span className="mx-8 text-primary drop-shadow-[0_0_5px_rgba(255,69,0,0.8)]">·</span> TRACK PREP
+                <span className="mx-8 text-primary drop-shadow-[0_0_5px_rgba(255,69,0,0.8)]">·</span> SUSPENSION
+                <span className="mx-8 text-primary drop-shadow-[0_0_5px_rgba(255,69,0,0.8)]">·</span> DIAGNOSTICS
+                <span className="mx-8 text-primary drop-shadow-[0_0_5px_rgba(255,69,0,0.8)]">·</span> DETAILING
+              </span>
+            ))}
+          </motion.div>
+        </motion.div>
+
+      </div>
+    </div>
+  );
+}

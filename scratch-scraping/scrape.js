@@ -1,0 +1,1 @@
+const puppeteer = require('puppeteer'); const fs = require('fs'); (async () => { const browser = await puppeteer.launch(); const page = await browser.newPage(); await page.goto('https://spectacular-showcase--infocynthiamedr.replit.app/', { waitUntil: 'networkidle0' }); const html = await page.content(); fs.writeFileSync('rendered.html', html); await browser.close(); })();
