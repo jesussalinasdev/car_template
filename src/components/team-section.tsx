@@ -29,14 +29,16 @@ export function TeamSection() {
           </motion.h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8 mt-16 relative z-10">
-          {dict.team.legends.slice(0, 2).map((legend: any, i: number) => {
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 relative z-10">
+          {dict.team.legends.map((legend: any, i: number) => {
             const originalImages = [
               '/assets/marcus-vance_2.jpg',
+              '/assets/elena-rostova.png',
               '/assets/marcus-vance.jpg'
             ];
             const originalNames = [
               'Viktor "The Surgeon" Volkov',
+              'Elena Rostova',
               'Marcus Vance'
             ];
             return (
@@ -65,7 +67,7 @@ export function TeamSection() {
               </div>
 
               {/* Info Box - Overlapping on Desktop, Stacking on Mobile */}
-              <div className="relative -mt-8 md:absolute md:-bottom-8 md:bottom-12 md:-right-8 bg-neutral-900 border border-neutral-800 p-6 md:w-80 shadow-2xl z-20 group-hover:border-primary/50 transition-colors duration-500 clip-diagonal mx-6 md:mx-0">
+              <div className="relative -mt-12 md:absolute md:-bottom-8 md:-right-8 bg-neutral-900 border border-neutral-800 p-6 md:w-80 shadow-2xl z-20 group-hover:border-primary/50 transition-colors duration-500 clip-diagonal mx-6 md:mx-0">
                 <div className="font-mono text-xs text-primary mb-2">ID: 00{i+1} // ACTIVE</div>
                 <h4 className="font-display text-2xl text-white uppercase mb-1">{originalNames[i]}</h4>
                 <p className="font-sans font-bold text-sm text-neutral-300 uppercase mb-4 tracking-wider">{legend.role}</p>

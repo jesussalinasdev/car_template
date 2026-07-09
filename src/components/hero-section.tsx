@@ -117,6 +117,45 @@ export function HeroSection() {
           transition={{ duration: 1, delay: 0.5 }}
         />
 
+        {/* --- LAYER -2 (Background Tech Elements) --- */}
+        <motion.div 
+          className="absolute inset-0 flex items-center justify-center md:justify-end md:pr-[10vw] pointer-events-none z-0 hidden md:flex"
+          style={{ x: layerMinus2X, y: layerMinus2Y }}
+        >
+          <div className="relative w-[65vw] max-w-[1200px] aspect-[16/9]">
+            {/* Target Crosshairs */}
+            <div className="absolute top-1/2 left-0 w-full h-[1px] bg-primary/20" />
+            <div className="absolute top-0 left-1/2 w-[1px] h-full bg-primary/20" />
+            
+            {/* Grid Markers */}
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="absolute w-2 h-2 border border-primary/40 rounded-full" style={{
+                top: i < 2 ? '20%' : '80%',
+                left: i % 2 === 0 ? '20%' : '80%'
+              }} />
+            ))}
+          </div>
+        </motion.div>
+
+        {/* --- LAYER -1 (Data Nodes) --- */}
+        <motion.div 
+          className="absolute inset-0 flex items-center justify-center md:justify-end md:pr-[10vw] pointer-events-none z-0 hidden md:flex"
+          style={{ x: layerMinus1X, y: layerMinus1Y }}
+        >
+          <div className="relative w-[65vw] max-w-[1200px] aspect-[16/9]">
+            {/* Floating Data Points */}
+            <div className="absolute top-[20%] left-[10%] flex items-center gap-2">
+              <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+              <span className="font-mono text-xs text-primary/70 tracking-widest uppercase">SYS_ACTIVE</span>
+            </div>
+            
+            <div className="absolute bottom-[20%] right-[10%] flex items-center gap-2">
+              <span className="font-mono text-xs text-primary/70 tracking-widest uppercase">CAL_LOCK</span>
+              <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+            </div>
+          </div>
+        </motion.div>
+
         {/* --- LAYER 1 (Behind Car Tech Circles) --- */}
         <motion.div 
           className="absolute inset-0 flex items-center justify-center md:justify-end md:pr-[10vw] pointer-events-none z-0 hidden md:flex"
@@ -145,8 +184,8 @@ export function HeroSection() {
             {/* Test: Waveform fake isolated */}
             <div className="absolute inset-0 z-20 pointer-events-none">
               
-              {/* Speed/RPM Readout (Top Right instead of Left to avoid title overlap) */}
-              <div className="absolute top-[5%] right-[5%] text-right font-mono text-primary/90 block pointer-events-auto">
+              {/* Speed/RPM Readout (Top Left on Mobile, Top Right on Desktop) */}
+              <div className="absolute top-[5%] left-[5%] md:left-auto md:right-[5%] text-left md:text-right font-mono text-primary/90 block pointer-events-auto">
                 <div className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tighter drop-shadow-[0_0_15px_rgba(255,69,0,0.5)]">
                   <motion.span>{speedText}</motion.span> <span className="text-xs md:text-xl text-primary/50 tracking-normal">MPH</span>
                 </div>
