@@ -1,7 +1,140 @@
 {
+  "meta": {
+    "title": "CarbonApex Mechanics",
+    "description": "Afinación y reparación de élite para vehículos premium."
+  },
+  "navbar": {
+    "services": "Servicios",
+    "workshop": "Taller",
+    "team": "Equipo",
+    "testimonials": "Testimonios",
+    "ignition": "Ignición"
+  },
   "hero": {
-    "title": "Desata el Máximo Rendimiento",
-    "subtitle": "Afinación y reparación de élite para vehículos premium.",
-    "cta": "Agendar Cita"
+    "tagline": "Apex Motors / Rendimiento de Élite",
+    "titleLine1": "Construido Para",
+    "titleLine2": "Dominar",
+    "titleLine3": "La Pista",
+    "desc": "Cada tornillo ajustado. Cada sistema optimizado. Cada auto transformado en un arma.",
+    "button": "Ignición",
+    "hud": {
+      "v12": "V12 Biturbo // 720 HP",
+      "aero": "Fuerza Aero // 1200kg"
+    },
+    "marquee": {
+      "item1": "AFINACIÓN DE MOTOR",
+      "item2": "PREP PARA PISTA",
+      "item3": "SUSPENSIÓN",
+      "item4": "DIAGNÓSTICO",
+      "item5": "DETALLADO"
+    }
+  },
+  "services": {
+    "tagline": "Ingeniería de Precisión",
+    "titleLine1": "Sistemas",
+    "titleLine2": "Mejorados",
+    "desc": "No cambiamos aceite. Extraemos cada onza de rendimiento para la que tu máquina fue diseñada y la llevamos más allá.",
+    "items": [
+      {
+        "title": "Afinación de Motor",
+        "desc": "Desbloqueando potencia oculta. Remapeos precisos, mejoras de inducción forzada y calibración comprobada en dinamómetro para hypercars.",
+        "stats": "+15% Potencia"
+      },
+      {
+        "title": "Preparación para Pista",
+        "desc": "Afinación quirúrgica de suspensión, balanceo en curvas y ajustes aerodinámicos. Convierte tu auto de fin de semana en un arma de circuito.",
+        "stats": "1.2g Lateral"
+      },
+      {
+        "title": "Carrocería a Medida",
+        "desc": "Integración de fibra de carbono, fabricación de widebody y corrección de pintura impecable. Agresivo, perfecto, diseñado.",
+        "stats": "Tolerancia Cero"
+      },
+      {
+        "title": "Diagnósticos",
+        "desc": "Análisis de telemetría y rastreo profundo de ECU. No adivinamos, medimos. Conciencia total del sistema.",
+        "stats": "100% Precisión"
+      }
+    ]
+  },
+  "workshop": {
+    "tagline": "// El Taller",
+    "titleLine1": "Donde el Metal",
+    "titleLine2": "Se Encuentra con el",
+    "titleLine3": "Mito.",
+    "desc": "Un santuario climatizado equipado con diagnósticos de grado quirúrgico y herramientas de fabricación a medida. Sin polvo. Sin atajos. Construimos lo que las fábricas no podrían imaginar.",
+    "stats": [
+      { "val": "8,000", "label": "Instalación (pies cuad.)" },
+      { "val": "3", "label": "Elevadores Activos" },
+      { "val": "24 hr", "label": "Control de Clima" }
+    ],
+    "hud": "// NÚCLEO DE MOTOR"
+  },
+  "gallery": {
+    "tagline": "Evidencia Visual",
+    "title": "La Sala de Operaciones",
+    "items": [
+      "Fabricación de Admisión",
+      "Laminado de Carbono",
+      "Afinación de Chasis",
+      "Ensamblaje de Bloque"
+    ]
+  },
+  "stats": {
+    "items": [
+      { "label": "Motores Construidos", "desc": "Ensamblado de precisión" },
+      { "label": "Potencia Total Añadida", "desc": "Verificado en dinamómetro" },
+      { "label": "Tolerancia", "desc": "Precisión quirúrgica" },
+      { "label": "Soporte de Pista", "desc": "Siempre listos" }
+    ]
+  },
+  "team": {
+    "tagline": "Los Arquitectos de la Velocidad",
+    "title": "Mecánicos Maestros",
+    "specialty": "Especialidad"
+  },
+  "testimonials": {
+    "bgText": "SIN COMPROMISO",
+    "title": "Construido Para La Élite",
+    "desc": "No hacemos marketing. Nuestros resultados hablan en el asfalto. Lee lo que dicen los dueños de las máquinas más capaces del mundo.",
+    "items": [
+      { "text": "Encontraron 120hp que el software de fábrica dejó en la mesa. No se conduce como el mismo auto. Es violento, de la mejor manera posible.", "author": "James T.", "car": "Porsche 911 Turbo S" },
+      { "text": "Apex no es un taller mecánico. Es una firma de ingeniería para gente que odia perder. Mis tiempos de vuelta bajaron 2.4 segundos.", "author": "Sarah H.", "car": "McLaren 720S" },
+      { "text": "Otros talleres dijeron que no se podía hacer. Apex lo construyó, lo mapeó y lo garantizó. Una búsqueda de la perfección sin compromisos.", "author": "David C.", "car": "Audi R8 Twin Turbo" }
+    ]
+  },
+  "booking": {
+    "title": "Solicita una Evaluación",
+    "desc": "No aceptamos cualquier vehículo. Envía tus datos a continuación y nuestros ingenieros evaluarán si tu máquina se alinea con nuestras capacidades.",
+    "fields": {
+      "name": "Nombre del Piloto",
+      "namePlaceholder": "Juan Pérez",
+      "email": "Señal de Contacto",
+      "emailPlaceholder": "juan@ejemplo.com",
+      "chassis": "Chasis de Máquina",
+      "chassisPlaceholder": "Marca y Modelo",
+      "power": "Potencia Actual",
+      "powerPlaceholder": "HP Estimado",
+      "objective": "Objetivo",
+      "objectivePlaceholder": "¿Qué estamos construiendo?"
+    },
+    "button": "Iniciar Protocolo"
+  },
+  "footer": {
+    "desc": "Donde la física pura se encuentra con la precisión quirúrgica. Construimos máquinas que redefinen límites.",
+    "location": {
+      "title": "Ubicación",
+      "line1": "Sector 7, Zona Industrial",
+      "line2": "Los Ángeles, CA 90021",
+      "line3": "/// ESTRICTAMENTE CON CITA"
+    },
+    "comms": {
+      "title": "Comunicaciones"
+    },
+    "copyright": "Apex Motors. Todos los Sistemas Nominales.",
+    "links": {
+      "privacy": "Privacidad",
+      "terms": "Términos"
+    }
   }
 }

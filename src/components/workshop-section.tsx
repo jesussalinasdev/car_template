@@ -1,9 +1,11 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useI18n } from '@/components/i18n-provider';
 
 
 
 export function WorkshopSection() {
+  const { dict } = useI18n();
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -46,7 +48,7 @@ export function WorkshopSection() {
               transition={{ duration: 0.5 }}
               className="font-mono text-[11px] text-primary uppercase tracking-[0.35em] mb-5"
             >
-              // The Workshop
+              {dict.workshop.tagline}
             </motion.p>
 
             <motion.h2
@@ -56,7 +58,7 @@ export function WorkshopSection() {
               transition={{ duration: 0.65, delay: 0.08 }}
               className="font-display text-6xl md:text-8xl uppercase leading-none tracking-tighter text-white mb-7"
             >
-              Where Metal<br />Meets<br /><span className="text-primary">Myth.</span>
+              {dict.workshop.titleLine1}<br />{dict.workshop.titleLine2}<br /><span className="text-primary">{dict.workshop.titleLine3}</span>
             </motion.h2>
 
             <motion.p
@@ -66,9 +68,7 @@ export function WorkshopSection() {
               transition={{ duration: 0.55, delay: 0.18 }}
               className="text-neutral-400 font-sans text-sm leading-relaxed max-w-md"
             >
-              A climate-controlled sanctuary equipped with surgical-grade diagnostics
-              and bespoke fabrication tools. No dust. No shortcuts. We build what
-              factories couldn't imagine.
+              {dict.workshop.desc}
             </motion.p>
 
             {/* Stats */}
@@ -79,14 +79,10 @@ export function WorkshopSection() {
               transition={{ duration: 0.55, delay: 0.28 }}
               className="flex gap-10 mt-10 pt-8 border-t border-white/10"
             >
-              {[
-                ['8,000', 'sq/ft Facility'],
-                ['3', 'Active Lifts'],
-                ['24 hr', 'Climate Control'],
-              ].map(([val, label]) => (
-                <div key={label}>
-                  <div className="font-display text-5xl md:text-6xl text-primary leading-none drop-shadow-[0_0_15px_rgba(255,69,0,0.4)]">{val}</div>
-                  <div className="font-mono text-[11px] md:text-sm text-white/50 uppercase tracking-widest mt-2">{label}</div>
+              {dict.workshop.stats.map((stat: any, i: number) => (
+                <div key={i}>
+                  <div className="font-display text-5xl md:text-6xl text-primary leading-none drop-shadow-[0_0_15px_rgba(255,69,0,0.4)]">{stat.val}</div>
+                  <div className="font-mono text-[11px] md:text-sm text-white/50 uppercase tracking-widest mt-2">{stat.label}</div>
                 </div>
               ))}
             </motion.div>
@@ -106,7 +102,7 @@ export function WorkshopSection() {
 
             {/* HUD label */}
             <div className="absolute top-4 left-4 z-30 font-mono text-[10px] text-primary/70 uppercase tracking-widest">
-              // ENGINE CORE
+              {dict.workshop.hud}
             </div>
 
             {/* Corner accents */}

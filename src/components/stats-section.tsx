@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { useI18n } from '@/components/i18n-provider';
 
 function Counter({ from, to, duration, suffix = '' }: { from: number, to: number, duration: number, suffix?: string }) {
   const nodeRef = useRef<HTMLSpanElement>(null);
@@ -38,14 +39,15 @@ function Counter({ from, to, duration, suffix = '' }: { from: number, to: number
   );
 }
 
-const stats = [
-  { value: 1200, suffix: '+', label: 'Engines Built', desc: 'Precision assembled' },
-  { value: 15000, suffix: 'HP', label: 'Total Output Added', desc: 'Dyno verified' },
-  { value: 0, suffix: '.01mm', label: 'Tolerance', desc: 'Surgical accuracy' },
-  { value: 24, suffix: '/7', label: 'Track Support', desc: 'Always ready' }
+const statsConfig = [
+  { value: 1200, suffix: '+' },
+  { value: 15000, suffix: 'HP' },
+  { value: 0, suffix: '.01mm' },
+  { value: 24, suffix: '/7' }
 ];
 
 export function StatsSection() {
+  const { dict } = useI18n();
   return (
     <section className="py-24 bg-neutral-950 border-y border-neutral-900 relative overflow-hidden">
       {/* Mechanical grid background */}
@@ -61,7 +63,7 @@ export function StatsSection() {
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8">
-          {stats.map((stat, i) => (
+          {statsConfig.map((stat, i) => (
             <motion.div 
               key={i}
               initial={{ opacity: 0, y: 30 }}
@@ -78,10 +80,10 @@ export function StatsSection() {
                 <Counter from={0} to={stat.value} duration={2} suffix={stat.suffix} />
               </div>
               <h4 className="text-primary font-mono text-sm uppercase tracking-widest mb-1">
-                {stat.label}
+                {dict.stats.items[i].label}
               </h4>
               <p className="text-neutral-500 font-sans text-xs uppercase tracking-wider">
-                {stat.desc}
+                {dict.stats.items[i].desc}
               </p>
             </motion.div>
           ))}

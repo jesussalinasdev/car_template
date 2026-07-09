@@ -1,7 +1,140 @@
 {
+  "meta": {
+    "title": "CarbonApex Mechanics",
+    "description": "Elite tuning and repair for premium vehicles."
+  },
+  "navbar": {
+    "services": "Services",
+    "workshop": "Workshop",
+    "team": "Team",
+    "testimonials": "Testimonials",
+    "ignition": "Ignition"
+  },
   "hero": {
-    "title": "Unleash Maximum Performance",
-    "subtitle": "Elite tuning and repair for premium vehicles.",
-    "cta": "Book Appointment"
+    "tagline": "Apex Motors / Elite Performance",
+    "titleLine1": "Built To",
+    "titleLine2": "Dominate",
+    "titleLine3": "The Track",
+    "desc": "Every bolt torqued. Every system optimized. Every car transformed into a weapon.",
+    "button": "Ignition",
+    "hud": {
+      "v12": "V12 Biturbo // 720 HP",
+      "aero": "Aero Force // 1200kg"
+    },
+    "marquee": {
+      "item1": "ENGINE TUNING",
+      "item2": "TRACK PREP",
+      "item3": "SUSPENSION",
+      "item4": "DIAGNOSTICS",
+      "item5": "DETAILING"
+    }
+  },
+  "services": {
+    "tagline": "Precision Engineering",
+    "titleLine1": "System",
+    "titleLine2": "Upgrades",
+    "desc": "We don't do oil changes. We extract every ounce of performance your machine was designed to deliver, and then push it further.",
+    "items": [
+      {
+        "title": "Engine Tuning",
+        "desc": "Unlocking hidden horsepower. Precision remaps, forced induction upgrades, and dyno-proven calibration for hypercars.",
+        "stats": "+15% Output"
+      },
+      {
+        "title": "Track Prep",
+        "desc": "Surgical suspension tuning, corner balancing, and aero adjustments. Turn your weekend car into a circuit weapon.",
+        "stats": "1.2g Lateral"
+      },
+      {
+        "title": "Bespoke Bodywork",
+        "desc": "Carbon fiber integration, widebody fabrication, and flawless paint correction. Aggressive, seamless, engineered.",
+        "stats": "Zero Tolerance"
+      },
+      {
+        "title": "Diagnostics",
+        "desc": "Telemetry analysis and deep ECU interrogation. We don't guess, we measure. Total system awareness.",
+        "stats": "100% Precision"
+      }
+    ]
+  },
+  "workshop": {
+    "tagline": "// The Workshop",
+    "titleLine1": "Where Metal",
+    "titleLine2": "Meets",
+    "titleLine3": "Myth.",
+    "desc": "A climate-controlled sanctuary equipped with surgical-grade diagnostics and bespoke fabrication tools. No dust. No shortcuts. We build what factories couldn't imagine.",
+    "stats": [
+      { "val": "8,000", "label": "sq/ft Facility" },
+      { "val": "3", "label": "Active Lifts" },
+      { "val": "24 hr", "label": "Climate Control" }
+    ],
+    "hud": "// ENGINE CORE"
+  },
+  "gallery": {
+    "tagline": "Visual Evidence",
+    "title": "The Operating Room",
+    "items": [
+      "Intake Fabrication",
+      "Carbon Layup",
+      "Chassis Tuning",
+      "Block Assembly"
+    ]
+  },
+  "stats": {
+    "items": [
+      { "label": "Engines Built", "desc": "Precision assembled" },
+      { "label": "Total Output Added", "desc": "Dyno verified" },
+      { "label": "Tolerance", "desc": "Surgical accuracy" },
+      { "label": "Track Support", "desc": "Always ready" }
+    ]
+  },
+  "team": {
+    "tagline": "The Architects of Speed",
+    "title": "Master Mechanics",
+    "specialty": "Specialty"
+  },
+  "testimonials": {
+    "bgText": "NO COMPROMISE",
+    "title": "Built For The Elite",
+    "desc": "We don't do marketing. Our results speak on the asphalt. Read what the owners of the world's most capable machines have to say.",
+    "items": [
+      { "text": "They found 120hp that the factory software left on the table. It doesn't drive like the same car. It's violent, in the best way possible.", "author": "James T.", "car": "Porsche 911 Turbo S" },
+      { "text": "Apex isn't a mechanic shop. It's an engineering firm for people who hate losing. My lap times dropped by 2.4 seconds after they dialed in the aero.", "author": "Sarah H.", "car": "McLaren 720S" },
+      { "text": "Other shops said it couldn't be done. Apex built it, mapped it, and warrantied it. Uncompromising pursuit of perfection.", "author": "David C.", "car": "Audi R8 Twin Turbo" }
+    ]
+  },
+  "booking": {
+    "title": "Request An Assessment",
+    "desc": "We do not accept every vehicle. Submit your details below, and our engineers will evaluate if your machine aligns with our capabilities.",
+    "fields": {
+      "name": "Pilot Name",
+      "namePlaceholder": "John Doe",
+      "email": "Contact Signal",
+      "emailPlaceholder": "john@example.com",
+      "chassis": "Machine Chassis",
+      "chassisPlaceholder": "Make & Model",
+      "power": "Current Power",
+      "powerPlaceholder": "Est. HP",
+      "objective": "Objective",
+      "objectivePlaceholder": "What are we building?"
+    },
+    "button": "Initiate Protocol"
+  },
+  "footer": {
+    "desc": "Where raw physics meets surgical precision. We build machines that redefine limits.",
+    "location": {
+      "title": "Location",
+      "line1": "Sector 7, Industrial Zone",
+      "line2": "Los Angeles, CA 90021",
+      "line3": "/// STRICTLY BY APPOINTMENT"
+    },
+    "comms": {
+      "title": "Comms"
+    },
+    "copyright": "Apex Motors. All Systems Nominal.",
+    "links": {
+      "privacy": "Privacy",
+      "terms": "Terms"
+    }
   }
 }

@@ -1,34 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useI18n } from '@/components/i18n-provider';
 
-const services = [
-  {
-    title: 'Engine Tuning',
-    desc: 'Unlocking hidden horsepower. Precision remaps, forced induction upgrades, and dyno-proven calibration for hypercars.',
-    icon: '01',
-    stats: '+15% Output',
-  },
-  {
-    title: 'Track Prep',
-    desc: 'Surgical suspension tuning, corner balancing, and aero adjustments. Turn your weekend car into a circuit weapon.',
-    icon: '02',
-    stats: '1.2g Lateral',
-  },
-  {
-    title: 'Bespoke Bodywork',
-    desc: 'Carbon fiber integration, widebody fabrication, and flawless paint correction. Aggressive, seamless, engineered.',
-    icon: '03',
-    stats: 'Zero Tolerance',
-  },
-  {
-    title: 'Diagnostics',
-    desc: 'Telemetry analysis and deep ECU interrogation. We don\'t guess, we measure. Total system awareness.',
-    icon: '04',
-    stats: '100% Precision',
-  }
-];
-
-function ServiceCard({ service, index }: { service: typeof services[0], index: number }) {
+function ServiceCard({ service, index }: { service: any, index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
@@ -116,6 +90,7 @@ function ServiceCard({ service, index }: { service: typeof services[0], index: n
 }
 
 export function ServicesSection() {
+  const { dict } = useI18n();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -124,6 +99,11 @@ export function ServicesSection() {
 
   const titleY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   
+  const services = dict.services.items.map((item: any, i: number) => ({
+    ...item,
+    icon: `0${i + 1}`
+  }));
+
   return (
     <section id="services" ref={containerRef} className="py-32 bg-transparent relative z-10">
       {/* Background elements */}
@@ -135,14 +115,14 @@ export function ServicesSection() {
           className="mb-24 md:flex items-end justify-between"
         >
           <div>
-            <h2 className="text-sm font-sans tracking-[0.3em] text-primary uppercase mb-4">Precision Engineering</h2>
+            <h2 className="text-sm font-sans tracking-[0.3em] text-primary uppercase mb-4">{dict.services.tagline}</h2>
             <h3 className="text-6xl md:text-8xl font-display uppercase leading-[0.85]">
-              System<br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-neutral-600">Upgrades</span>
+              {dict.services.titleLine1}<br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-neutral-600">{dict.services.titleLine2}</span>
             </h3>
           </div>
           <p className="max-w-sm text-neutral-400 font-sans text-sm mt-8 md:mt-0 border-l border-primary/50 pl-4">
-            We don't do oil changes. We extract every ounce of performance your machine was designed to deliver, and then push it further.
+            {dict.services.desc}
           </p>
         </motion.div>
 

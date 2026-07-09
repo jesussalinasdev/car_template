@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
-
+import { useI18n } from '@/components/i18n-provider';
 
 
 
@@ -47,6 +47,7 @@ function CarRotator() {
 }
 
 export function HeroSection() {
+  const { dict } = useI18n();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -138,8 +139,9 @@ export function HeroSection() {
                 <div className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tighter drop-shadow-[0_0_15px_rgba(255,69,0,0.5)]">
                   <motion.span>{speedText}</motion.span> <span className="text-xs md:text-xl text-primary/50 tracking-normal">MPH</span>
                 </div>
-                <div className="text-sm md:text-2xl lg:text-3xl mt-1 font-light opacity-80">
-                  <motion.span>{rpmText}</motion.span> <span className="text-[10px] md:text-sm text-primary/50">RPM</span>
+                <div className="flex justify-between items-end border-b border-white/20 pb-2">
+                  <span className="font-mono text-[10px] text-primary/70 tracking-widest">{dict.hero.hud.v12}</span>
+                  <span className="font-mono text-[10px] text-primary/70 tracking-widest">{dict.hero.hud.aero}</span>
                 </div>
               </div>
 
@@ -171,7 +173,7 @@ export function HeroSection() {
               >
                 <div className="h-[2px] w-12 bg-primary drop-shadow-[0_0_8px_rgba(255,69,0,0.8)] hidden md:block"></div>
                 <span className="text-primary font-sans font-bold tracking-[0.2em] md:tracking-[0.4em] uppercase text-xs md:text-sm drop-shadow-[0_0_8px_rgba(255,69,0,0.5)] text-center md:text-left">
-                  Apex Motors / Elite Performance
+                  {dict.hero.tagline}
                 </span>
               </motion.div>
 
@@ -181,11 +183,11 @@ export function HeroSection() {
                 transition={{ duration: 0.8, delay: 1.7, ease: "easeOut" }}
                 className="text-7xl md:text-8xl lg:text-9xl font-display font-bold uppercase leading-[0.85] tracking-tight mb-8"
               >
-                Built To<br/>
+                {dict.hero.titleLine1}<br/>
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-500 to-primary block my-2">
-                  Dominate
+                  {dict.hero.titleLine2}
                 </span>
-                The Track
+                {dict.hero.titleLine3}
               </motion.h1>
 
               <motion.p
@@ -194,7 +196,7 @@ export function HeroSection() {
                 transition={{ duration: 0.8, delay: 1.9, ease: "easeOut" }}
                 className="text-white/60 font-sans text-sm md:text-xl max-w-md mb-8 md:mb-12 leading-relaxed border-l-0 md:border-l-2 md:border-primary/50 md:pl-6"
               >
-                Every bolt torqued. Every system optimized. Every car transformed into a weapon.
+                {dict.hero.desc}
               </motion.p>
 
               <motion.div
@@ -205,7 +207,7 @@ export function HeroSection() {
                 <button className="group relative px-12 py-5 bg-transparent border border-primary/50 text-white font-display text-2xl uppercase tracking-widest clip-diagonal overflow-hidden transition-all hover:border-primary">
                   <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
                   <span className="relative z-10 flex items-center gap-4 group-hover:text-black transition-colors">
-                    Ignition
+                    {dict.hero.button}
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-2 transition-transform">
                       <line x1="5" y1="12" x2="19" y2="12"></line>
                       <polyline points="12 5 19 12 12 19"></polyline>
@@ -232,11 +234,11 @@ export function HeroSection() {
           >
             {[...Array(4)].map((_, i) => (
               <span key={i} className="flex items-center">
-                <span className="mx-8 text-primary drop-shadow-[0_0_5px_rgba(255,69,0,0.8)]">·</span> ENGINE TUNING
-                <span className="mx-8 text-primary drop-shadow-[0_0_5px_rgba(255,69,0,0.8)]">·</span> TRACK PREP
-                <span className="mx-8 text-primary drop-shadow-[0_0_5px_rgba(255,69,0,0.8)]">·</span> SUSPENSION
-                <span className="mx-8 text-primary drop-shadow-[0_0_5px_rgba(255,69,0,0.8)]">·</span> DIAGNOSTICS
-                <span className="mx-8 text-primary drop-shadow-[0_0_5px_rgba(255,69,0,0.8)]">·</span> DETAILING
+                <span className="mx-8 text-primary drop-shadow-[0_0_5px_rgba(255,69,0,0.8)]">·</span> {dict.hero.marquee.item1}
+                <span className="mx-8 text-primary drop-shadow-[0_0_5px_rgba(255,69,0,0.8)]">·</span> {dict.hero.marquee.item2}
+                <span className="mx-8 text-primary drop-shadow-[0_0_5px_rgba(255,69,0,0.8)]">·</span> {dict.hero.marquee.item3}
+                <span className="mx-8 text-primary drop-shadow-[0_0_5px_rgba(255,69,0,0.8)]">·</span> {dict.hero.marquee.item4}
+                <span className="mx-8 text-primary drop-shadow-[0_0_5px_rgba(255,69,0,0.8)]">·</span> {dict.hero.marquee.item5}
               </span>
             ))}
           </motion.div>

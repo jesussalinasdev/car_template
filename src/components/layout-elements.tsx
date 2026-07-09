@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { usePathname, useRouter } from 'next/navigation';
+import { useI18n } from '@/components/i18n-provider';
 
 export function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -91,8 +93,33 @@ export function CustomCursor() {
   );
 }
 
+function LanguageSwitcher({ className = '' }: { className?: string }) {
+  const pathname = usePathname();
+  const router = useRouter();
+  
+  const currentLang = pathname.startsWith('/es') ? 'es' : 'en';
+
+  const toggleLang = () => {
+    const nextLang = currentLang === 'en' ? 'es' : 'en';
+    const newPath = pathname.replace(`/${currentLang}`, `/${nextLang}`);
+    router.push(newPath || `/${nextLang}`);
+  };
+
+  return (
+    <button 
+      onClick={toggleLang}
+      className={`font-display tracking-widest uppercase transition-colors hover:text-white flex items-center gap-2 ${className}`}
+    >
+      <span className={currentLang === 'en' ? 'text-primary' : 'text-neutral-500 hover:text-white transition-colors'}>EN</span>
+      <span className="text-neutral-700">/</span>
+      <span className={currentLang === 'es' ? 'text-primary' : 'text-neutral-500 hover:text-white transition-colors'}>ES</span>
+    </button>
+  );
+}
+
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { dict } = useI18n();
   const { scrollY } = useScroll();
   const backgroundColor = useTransform(
     scrollY,
@@ -123,65 +150,73 @@ export function Navbar() {
       </div>
 
       <nav className="hidden md:flex items-center gap-8">
-        {['Services', 'Workshop', 'Team', 'Testimonials'].map((item) => (
+        {[
+          { key: 'services', label: dict.navbar.services, href: '#services' },
+          { key: 'workshop', label: dict.navbar.workshop, href: '#workshop' },
+          { key: 'team', label: dict.navbar.team, href: '#team' },
+          { key: 'testimonials', label: dict.navbar.testimonials, href: '#testimonials' }
+        ].map((item) => (
           <a
-            key={item}
-            href={`#${item.toLowerCase()}`}
+            key={item.key}
+            href={item.href}
             className="text-sm font-medium uppercase tracking-widest text-muted-foreground hover:text-white transition-colors relative group"
           >
-            {item}
+            {item.label}
             <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-primary transition-all group-hover:w-full" />
           </a>
         ))}
       </nav>
 
-      <button className="hidden md:flex items-center justify-center px-6 py-2 bg-transparent border border-primary text-primary font-display tracking-widest uppercase hover:bg-primary hover:text-black transition-all clip-diagonal group">
-        <span className="relative z-10">Ignition</span>
-        <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
-      </button>
+      <div className="hidden md:flex items-center gap-8">
+        <LanguageSwitcher className="text-lg" />
+        <button className="flex items-center justify-center px-6 py-2 bg-transparent border border-primary text-primary font-display tracking-widest uppercase hover:bg-primary hover:text-black transition-all clip-diagonal group">
+          <span className="relative z-10">{dict.navbar.ignition}</span>
+          <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
+        </button>
+      </div>
 
-      {/* Mobile menu toggle */}
-      <button 
-        className="md:hidden flex flex-col justify-center gap-1.5 p-2 z-[60] relative"
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-      >
-        <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-        <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
-        <div className={`w-6 h-0.5 transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2 bg-white' : 'bg-primary w-4 self-end'}`} />
-      </button>
+      <div className="flex items-center gap-6 md:hidden">
+        <LanguageSwitcher className="text-sm z-[60] relative" />
+        
+        {/* Mobile menu toggle */}
+        <button 
+          className="flex flex-col justify-center gap-1.5 p-2 z-[60] relative"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+          <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
+          <div className={`w-6 h-0.5 transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2 bg-white' : 'bg-primary w-4 self-end'}`} />
+        </button>
+      </div>
 
-      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: '-100%' }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: '-100%' }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed top-0 left-0 w-screen h-[100dvh] z-[55] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8"
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center"
           >
-            {['Services', 'Workshop', 'Team', 'Testimonials'].map((item, i) => (
-              <motion.a
-                key={item}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 + i * 0.1 }}
-                href={`#${item.toLowerCase()}`}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-3xl font-display uppercase tracking-widest text-white hover:text-primary transition-colors"
-              >
-                {item}
-              </motion.a>
-            ))}
-            <motion.button 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6 }}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="mt-8 px-8 py-4 border border-primary text-primary font-display tracking-widest uppercase hover:bg-primary hover:text-black transition-all clip-diagonal"
-            >
-              Ignition
-            </motion.button>
+            <nav className="flex flex-col items-center gap-8">
+              {[
+                { key: 'services', label: dict.navbar.services, href: '#services' },
+                { key: 'workshop', label: dict.navbar.workshop, href: '#workshop' },
+                { key: 'team', label: dict.navbar.team, href: '#team' },
+                { key: 'testimonials', label: dict.navbar.testimonials, href: '#testimonials' }
+              ].map((item) => (
+                <a
+                  key={item.key}
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-3xl font-display uppercase tracking-widest text-white hover:text-primary transition-colors"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+            <button className="mt-12 px-8 py-4 bg-primary text-black font-display text-xl tracking-widest uppercase hover:bg-white transition-colors clip-diagonal">
+              {dict.navbar.ignition}
+            </button>
           </motion.div>
         )}
       </AnimatePresence>

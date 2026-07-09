@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { useI18n } from '@/components/i18n-provider';
 
 const photos = [
   '/assets/workshop_gallery_1_1783555510099.png',
@@ -10,6 +11,8 @@ const photos = [
 ];
 
 export function GallerySection() {
+  const { dict } = useI18n();
+
   return (
     <section id="gallery" className="py-32 bg-black relative border-t border-neutral-900">
       <div className="max-w-7xl mx-auto px-6">
@@ -22,7 +25,7 @@ export function GallerySection() {
             viewport={{ once: true }}
             className="text-primary font-mono text-sm tracking-[0.3em] uppercase mb-4"
           >
-            Visual Evidence
+            {dict.gallery.tagline}
           </motion.h2>
           <motion.h3 
             initial={{ opacity: 0, y: 20 }}
@@ -31,7 +34,7 @@ export function GallerySection() {
             transition={{ delay: 0.1 }}
             className="text-5xl md:text-7xl font-display uppercase text-white"
           >
-            The Operating Room
+            {dict.gallery.title}
           </motion.h3>
         </div>
 
@@ -68,7 +71,7 @@ export function GallerySection() {
                   FILE_{1048 + i}.RAW
                 </p>
                 <p className="font-display text-3xl text-white uppercase tracking-wider">
-                  {['Intake Fabrication', 'Carbon Layup', 'Chassis Tuning', 'Block Assembly'][i]}
+                  {dict.gallery.items[i]}
                 </p>
               </div>
             </motion.div>
