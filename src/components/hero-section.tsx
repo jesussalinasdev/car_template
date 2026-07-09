@@ -191,19 +191,6 @@ export function HeroSection() {
                 </div>
                 <div className="text-sm md:text-2xl lg:text-3xl mt-1 font-light opacity-80">
                   {rpm} <span className="text-[10px] md:text-sm text-primary/50">RPM</span>
-                </div>
-                
-                {/* Waveform fake */}
-                <div className="flex items-end justify-start md:justify-end gap-1 h-4 md:h-8 mt-2 md:mt-4">
-                  {[...Array(12)].map((_, i) => (
-                    <motion.div 
-                      key={i}
-                      className="w-1 md:w-1.5 bg-primary/70"
-                      animate={{ height: ['20%', '100%', '20%'] }}
-                      transition={{ duration: 0.5 + Math.random(), repeat: Infinity, ease: 'easeInOut', delay: Math.random() }}
-                    />
-                  ))}
-                </div>
               </div>
             </div>
 

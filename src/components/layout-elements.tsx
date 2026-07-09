@@ -6,8 +6,14 @@ export function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Check for mobile width
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
     if (typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
       setIsTouch(true);
       return;
@@ -45,10 +51,11 @@ export function CustomCursor() {
       window.removeEventListener('mouseover', handleMouseOver);
       window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('resize', checkMobile);
     };
   }, []);
 
-  if (isTouch) return null;
+  if (isTouch || isMobile) return null;
 
   return (
     <>
