@@ -219,8 +219,34 @@ export function HeroSection() {
           style={{ x: layer2X, y: layer2Y }}
         >
           <div className="relative w-[65vw] max-w-[1200px] aspect-[16/9]">
+            {/* Top Left/Right Corner Reticles */}
             <div className="absolute top-1/4 left-1/4 w-8 h-8 border-t-2 border-l-2 border-primary/40" />
             <div className="absolute bottom-1/4 right-1/4 w-8 h-8 border-b-2 border-r-2 border-primary/40" />
+
+            {/* AR Radar Sweep */}
+            <div className="absolute top-[25%] left-[20%] w-24 h-24 border border-primary/20 rounded-full overflow-hidden">
+              <div className="absolute top-1/2 left-1/2 w-full h-full border-t border-primary/60 origin-top-left animate-[spin_4s_linear_infinite]" style={{ background: 'conic-gradient(from 0deg at 0 0, rgba(255,69,0,0.4) 0deg, transparent 60deg)' }} />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-primary rounded-full" />
+              <div className="absolute top-1/2 left-0 w-full h-[1px] bg-primary/20" />
+              <div className="absolute top-0 left-1/2 w-[1px] h-full bg-primary/20" />
+            </div>
+
+            {/* Rear Wheel AR Scanner */}
+            <div className="absolute bottom-[20%] right-[15%] flex flex-col items-center">
+              <div className="w-16 h-16 border-2 border-primary/40 rounded-full animate-[spin_3s_linear_infinite] relative">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-3 bg-primary" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 border border-primary/60 rounded-full animate-[ping_2s_ease-out_infinite]" />
+              </div>
+              <span className="font-mono text-[8px] text-primary mt-2 tracking-widest bg-black/80 px-2 py-1 rounded backdrop-blur border border-primary/20">TRAC_CTRL : ON</span>
+            </div>
+            
+            {/* Front Wheel AR Scanner */}
+            <div className="absolute bottom-[25%] left-[25%] flex flex-col items-center">
+              <div className="w-12 h-12 border border-dashed border-primary/40 rounded-full animate-[spin_4s_linear_infinite_reverse] relative">
+                <div className="absolute inset-2 border-t border-primary/60 rounded-full animate-pulse" />
+              </div>
+              <span className="font-mono text-[8px] text-primary mt-2 tracking-widest bg-black/80 px-2 py-1 rounded backdrop-blur border border-primary/20">STEER_ANGLE : -2°</span>
+            </div>
           </div>
         </motion.div>
 
