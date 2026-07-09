@@ -115,7 +115,7 @@
 @layer base {
   * {
     @apply border-border;
-    cursor: none; /* We use a custom cursor */
+    cursor: none !important;
   }
 
   html {
@@ -172,5 +172,15 @@
   }
   .clip-diagonal-reverse {
     clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%, 0 20px);
+  }
+}
+
+/* Perfect touch-device cursor disabling */
+@media (hover: none) and (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+  .custom-cursor-element {
+    display: none !important;
   }
 }
