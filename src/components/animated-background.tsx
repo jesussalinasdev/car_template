@@ -148,9 +148,8 @@ export function AnimatedBackground() {
       <GlowOrb x="55%"  y="85%"   size={380} delay={8}  duration={16} opacity={0.09} />
       <GlowOrb x="25%"  y="20%"   size={300} delay={2}  duration={20} opacity={0.07} />
 
-      {/* Global vertical laser lines and pulse dot */}
+      {/* Global vertical laser lines */}
       <div className="absolute top-0 right-[15%] md:right-[20%] w-[1px] h-full bg-gradient-to-b from-transparent via-primary/40 to-transparent shadow-[0_0_20px_rgba(255,69,0,0.8)]" />
-      <div className="absolute top-[30%] right-[15%] md:right-[20%] -translate-x-[3px] md:-translate-x-[3.5px] w-2 h-2 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,1),_0_0_40px_rgba(255,69,0,1)] animate-pulse" />
       <div className="absolute top-0 left-[10%] md:left-[15%] w-[1px] h-full bg-gradient-to-b from-transparent via-primary/10 to-transparent shadow-[0_0_10px_rgba(255,69,0,0.3)]" />
 
       {/* Scan line */}

@@ -108,7 +108,7 @@ export function IntroAnimation({ onComplete }: { onComplete: () => void }) {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 1.08 }}
-            className="font-mono text-[10px] md:text-[11px] tracking-[0.55em] text-primary/50 uppercase mt-6"
+            className="font-mono text-xs md:text-sm tracking-[0.55em] text-primary/50 uppercase mt-8 text-center"
           >
             Elite Performance Engineering
           </motion.p>
@@ -132,7 +132,7 @@ export function IntroAnimation({ onComplete }: { onComplete: () => void }) {
             <motion.p
               animate={{ opacity: [0.4, 1, 0.4] }}
               transition={{ duration: 0.85, repeat: Infinity, delay: 1.18 }}
-              className="font-mono text-[8px] md:text-[9px] tracking-[0.55em] text-primary/40 uppercase mt-2 text-center"
+              className="font-mono text-[10px] md:text-xs tracking-[0.55em] text-primary/40 uppercase mt-3 text-center"
             >
               SYSTEMS ONLINE
             </motion.p>

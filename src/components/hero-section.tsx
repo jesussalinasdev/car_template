@@ -78,8 +78,8 @@ export function HeroSection() {
   useEffect(() => currentRPM.on('change', v => setRpm(Math.round(v))), [currentRPM]);
 
   return (
-    <div ref={containerRef} className="relative w-full overflow-hidden bg-transparent h-[150vh]">
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center perspective-1000">
+    <div ref={containerRef} className="relative w-full overflow-hidden bg-transparent md:h-[150vh]">
+      <div className="relative md:sticky md:top-0 min-h-screen md:h-screen w-full overflow-hidden flex flex-col md:block md:items-center md:justify-center perspective-1000">
         
         {/* INITIAL SCAN LINE */}
         <motion.div 
@@ -151,7 +151,7 @@ export function HeroSection() {
 
         {/* --- LAYER 0 (Main Car Subject) --- */}
         <motion.div 
-          className="absolute inset-0 flex items-end pb-[12vh] md:pb-0 md:items-center justify-center md:justify-end md:pr-[5vw] lg:pr-[10vw] z-10 pointer-events-none"
+          className="relative md:absolute inset-0 flex items-center justify-center md:justify-end md:pr-[5vw] lg:pr-[10vw] z-10 pointer-events-none pb-12 pt-8 md:pb-0 md:pt-0 w-full"
           style={{ x: layer0X, y: layer0Y }}
         >
           <motion.div 
@@ -172,6 +172,16 @@ export function HeroSection() {
                 transition={{ duration: 0.5 }} 
               />
             </AnimatePresence>
+
+            {/* Technological Hologram/Scan Overlay */}
+            <div className="absolute inset-0 pointer-events-none z-20 mix-blend-overlay opacity-30 mask-car">
+              <div className="w-full h-full bg-[linear-gradient(rgba(255,69,0,0.1)_2px,transparent_2px)] bg-[size:100%_8px]" />
+              <motion.div 
+                className="w-full h-1 bg-white blur-[1px]"
+                animate={{ y: ['0%', '100%'] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              />
+            </div>
             
             {/* Soft shadow underneath car */}
             <div className="absolute -bottom-[5%] left-[20%] right-[20%] h-[15%] bg-black blur-2xl rounded-[100%] pointer-events-none" />
@@ -260,7 +270,7 @@ export function HeroSection() {
         </motion.div>
 
         {/* --- MAIN TEXT CONTENT (Left Aligned) --- */}
-        <div className="absolute inset-0 z-40 flex md:items-center items-start pt-[12vh] md:pt-0 pointer-events-none">
+        <div className="relative md:absolute inset-0 z-40 flex md:items-center items-start pt-[12vh] md:pt-0 pointer-events-none w-full shrink-0">
           <div className="container mx-auto px-6 lg:px-12 w-full flex">
             <div className="w-full lg:w-1/2 flex flex-col items-center md:items-start text-center md:text-left pointer-events-auto">
               
@@ -321,13 +331,13 @@ export function HeroSection() {
 
         {/* --- BOTTOM CENTER SPEC BAR --- */}
         <motion.div 
-          className="absolute bottom-0 left-0 w-full bg-black/80 backdrop-blur-md border-t border-primary/20 overflow-hidden z-50 h-16 flex items-center"
+          className="relative md:absolute bottom-0 left-0 w-full bg-black/80 backdrop-blur-md border-t border-primary/20 overflow-hidden z-50 h-16 flex items-center mt-auto md:mt-0"
           initial={{ y: "100%" }}
           animate={{ y: "0%" }}
           transition={{ duration: 0.8, delay: 2.3, ease: "easeOut" }}
         >
           <motion.div 
-            className="flex whitespace-nowrap text-xs md:text-sm font-sans font-bold tracking-[0.2em] uppercase text-white/50"
+            className="flex whitespace-nowrap text-xs md:text-sm font-sans font-bold tracking-[0.2em] uppercase text-white/50 pointer-events-none"
             animate={{ x: ["0%", "-50%"] }}
             transition={{ duration: 20, ease: "linear", repeat: Infinity }}
           >
