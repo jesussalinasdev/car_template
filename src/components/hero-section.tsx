@@ -116,7 +116,21 @@ export function HeroSection() {
           transition={{ duration: 1, delay: 0.5 }}
         />
 
-        {/* CAR, HUD, AND PARTICLES TEMPORARILY REMOVED FOR FLICKER ISOLATION TEST */}
+        {/* --- LAYER 0 (Main Car Subject - Bare Rotating Car Only) --- */}
+        <motion.div 
+          className="order-2 md:order-none relative md:absolute inset-0 flex items-center justify-center md:justify-end md:pr-[5vw] lg:pr-[10vw] z-10 pointer-events-none pb-12 pt-8 md:pb-0 md:pt-0 w-full"
+          style={{ x: layer0X, y: layer0Y }}
+        >
+          <motion.div 
+            className="relative w-[100vw] md:w-[75vw] lg:w-[65vw] max-w-[1200px] aspect-[16/9]"
+            initial={{ y: 150, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {/* Isolated Car Rotator */}
+            <CarRotator />
+          </motion.div>
+        </motion.div>
 
         {/* --- MAIN TEXT CONTENT (Left Aligned) --- */}
         <div className="order-1 md:order-none relative md:absolute inset-0 z-40 flex md:items-center items-start pt-[12vh] md:pt-0 pointer-events-none w-full shrink-0">
