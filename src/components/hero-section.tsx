@@ -69,14 +69,7 @@ export function HeroSection() {
   const layer2Y = useTransform(mouseY, [-0.5, 0.5], ["-15%", "15%"]);
 
   // HUD text updates based on scroll
-  const currentSpeed = useTransform(scrollYProgress, [0, 1], [0, 212]);
-  const currentRPM = useTransform(scrollYProgress, [0, 1], [1000, 8500]);
-  const [speed, setSpeed] = useState(0);
-  const [rpm, setRpm] = useState(1000);
-
-  useEffect(() => currentSpeed.on('change', v => setSpeed(Math.round(v))), [currentSpeed]);
-  useEffect(() => currentRPM.on('change', v => setRpm(Math.round(v))), [currentRPM]);
-
+  // HUD text updates based on scroll
   return (
     <div ref={containerRef} className="relative w-full overflow-hidden bg-transparent md:h-[150vh]">
       <div className="relative md:sticky md:top-0 min-h-screen md:h-screen w-full overflow-hidden flex flex-col md:block md:items-center md:justify-center perspective-1000">
@@ -157,10 +150,10 @@ export function HeroSection() {
             </div>
 
             {/* Pre-rendered layers (Zero flicker crossfade) */}
-            <motion.img src="/assets/hero-car-front-34.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 0 ? 1 : 0 }} transition={{ duration: 0.6 }} />
-            <motion.img src="/assets/hero-car-side.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 1 ? 1 : 0 }} transition={{ duration: 0.6 }} />
-            <motion.img src="/assets/hero-car-rear-34.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 2 ? 1 : 0 }} transition={{ duration: 0.6 }} />
-            <motion.img src="/assets/hero-car-front.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 3 ? 1 : 0 }} transition={{ duration: 0.6 }} />
+            <motion.img src="/assets/hero-car-front-34.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 0 ? 1 : 0 }} transition={{ duration: activeIndex === 0 ? 0.1 : 0.8 }} />
+            <motion.img src="/assets/hero-car-side.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 1 ? 1 : 0 }} transition={{ duration: activeIndex === 1 ? 0.1 : 0.8 }} />
+            <motion.img src="/assets/hero-car-rear-34.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 2 ? 1 : 0 }} transition={{ duration: activeIndex === 2 ? 0.1 : 0.8 }} />
+            <motion.img src="/assets/hero-car-front.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 3 ? 1 : 0 }} transition={{ duration: activeIndex === 3 ? 0.1 : 0.8 }} />
             
             {/* Attached HUD Readouts */}
             <div className="absolute inset-0 z-20 pointer-events-none">
@@ -184,15 +177,7 @@ export function HeroSection() {
                 </div>
               </div>
 
-              {/* Speed/RPM Readout */}
-              <div className="absolute top-[5%] left-[5%] md:top-auto md:bottom-[15%] md:-right-[5%] md:left-auto text-left md:text-right font-mono text-primary/90 block">
-                <div className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tighter drop-shadow-[0_0_15px_rgba(255,69,0,0.5)]">
-                  {speed} <span className="text-xs md:text-xl text-primary/50 tracking-normal">MPH</span>
-                </div>
-                <div className="text-sm md:text-2xl lg:text-3xl mt-1 font-light opacity-80">
-                  {rpm} <span className="text-[10px] md:text-sm text-primary/50">RPM</span>
-                </div>
-              </div>
+              {/* Speed/RPM Readout (Removed per user request) */}
             </div>
 
             {/* Soft shadow underneath car */}

@@ -175,12 +175,14 @@
   }
 }
 
-/* Perfect touch-device cursor disabling */
-@media (hover: none) and (pointer: coarse) {
+/* Perfect touch-device and mobile cursor disabling */
+@media (max-width: 767px), (hover: none) and (pointer: coarse) {
   * {
     cursor: auto !important;
   }
   .custom-cursor-element {
     display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
   }
 }
