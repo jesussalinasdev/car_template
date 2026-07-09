@@ -32,16 +32,16 @@ function CarRotator() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % 4);
-    }, 3500);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <>
-      <motion.img src="/assets/hero-car-front-34.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 0 ? 1 : 0 }} transition={{ duration: activeIndex === 0 ? 0.1 : 0.8 }} />
-      <motion.img src="/assets/hero-car-side.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 1 ? 1 : 0 }} transition={{ duration: activeIndex === 1 ? 0.1 : 0.8 }} />
-      <motion.img src="/assets/hero-car-rear-34.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 2 ? 1 : 0 }} transition={{ duration: activeIndex === 2 ? 0.1 : 0.8 }} />
-      <motion.img src="/assets/hero-car-front.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 3 ? 1 : 0 }} transition={{ duration: activeIndex === 3 ? 0.1 : 0.8 }} />
+      <motion.img src="/assets/hero-car-front-34.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 0 ? 1 : 0 }} transition={{ duration: activeIndex === 0 ? 0.8 : 1.5 }} />
+      <motion.img src="/assets/hero-car-side.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 1 ? 1 : 0 }} transition={{ duration: activeIndex === 1 ? 0.8 : 1.5 }} />
+      <motion.img src="/assets/hero-car-rear-34.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 2 ? 1 : 0 }} transition={{ duration: activeIndex === 2 ? 0.8 : 1.5 }} />
+      <motion.img src="/assets/hero-car-front.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 3 ? 1 : 0 }} transition={{ duration: activeIndex === 3 ? 0.8 : 1.5 }} />
     </>
   );
 }
@@ -132,7 +132,7 @@ export function HeroSection() {
 
             {/* Test: Waveform fake isolated */}
             <div className="absolute inset-0 z-20 pointer-events-none">
-              <div className="absolute top-[5%] left-[5%] md:top-auto md:bottom-[15%] md:-right-[5%] md:left-auto flex items-end justify-start md:justify-end gap-1 h-4 md:h-8">
+              <div className="absolute bottom-[5%] right-[5%] flex items-end justify-end gap-1 h-4 md:h-8">
                 {[...Array(12)].map((_, i) => (
                   <motion.div 
                     key={i}
