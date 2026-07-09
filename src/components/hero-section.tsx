@@ -78,7 +78,7 @@ export function HeroSection() {
   useEffect(() => currentRPM.on('change', v => setRpm(Math.round(v))), [currentRPM]);
 
   return (
-    <div ref={containerRef} className="relative w-full overflow-hidden bg-black h-[250vh]">
+    <div ref={containerRef} className="relative w-full overflow-hidden bg-black h-[150vh]">
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center perspective-1000">
         
         {/* INITIAL SCAN LINE */}
