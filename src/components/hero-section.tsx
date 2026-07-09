@@ -35,19 +35,7 @@ export function HeroSection() {
 
   const { x: mouseX, y: mouseY } = useMouseParallax();
 
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % 4);
-    }, 3500); // Cambia de imagen cada 3.5 segundos
-    return () => clearInterval(interval);
-  }, []);
-
-  const oA = activeIndex === 0 ? 1 : 0;
-  const oB = activeIndex === 1 ? 1 : 0;
-  const oC = activeIndex === 2 ? 1 : 0;
-  const oD = activeIndex === 3 ? 1 : 0;
+  // Static image only (no rotation per user request)
 
   // Depth Parallax multipliers
   const layerMinus3X = useTransform(mouseX, [-0.5, 0.5], ["2%", "-2%"]);
@@ -69,7 +57,13 @@ export function HeroSection() {
   const layer2Y = useTransform(mouseY, [-0.5, 0.5], ["-15%", "15%"]);
 
   // HUD text updates based on scroll
-  // HUD text updates based on scroll
+  const currentSpeed = useTransform(scrollYProgress, [0, 1], [0, 212]);
+  const currentRPM = useTransform(scrollYProgress, [0, 1], [1000, 8500]);
+  const [speed, setSpeed] = useState(0);
+  const [rpm, setRpm] = useState(1000);
+
+  useEffect(() => currentSpeed.on('change', v => setSpeed(Math.round(v))), [currentSpeed]);
+  useEffect(() => currentRPM.on('change', v => setRpm(Math.round(v))), [currentRPM]);
   return (
     <div ref={containerRef} className="relative w-full overflow-hidden bg-transparent md:h-[150vh]">
       <div className="relative md:sticky md:top-0 min-h-screen md:h-screen w-full overflow-hidden flex flex-col md:block md:items-center md:justify-center perspective-1000">
@@ -149,11 +143,8 @@ export function HeroSection() {
               </motion.svg>
             </div>
 
-            {/* Pre-rendered layers (Zero flicker crossfade) */}
-            <motion.img src="/assets/hero-car-front-34.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 0 ? 1 : 0 }} transition={{ duration: activeIndex === 0 ? 0.1 : 0.8 }} />
-            <motion.img src="/assets/hero-car-side.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 1 ? 1 : 0 }} transition={{ duration: activeIndex === 1 ? 0.1 : 0.8 }} />
-            <motion.img src="/assets/hero-car-rear-34.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 2 ? 1 : 0 }} transition={{ duration: activeIndex === 2 ? 0.1 : 0.8 }} />
-            <motion.img src="/assets/hero-car-front.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none will-change-opacity" animate={{ opacity: activeIndex === 3 ? 1 : 0 }} transition={{ duration: activeIndex === 3 ? 0.1 : 0.8 }} />
+            {/* Main Car Subject (Static) */}
+            <img src="/assets/hero-car-front-34.png" alt="Car" className="absolute inset-0 w-full h-full object-contain pointer-events-none" />
             
             {/* Attached HUD Readouts */}
             <div className="absolute inset-0 z-20 pointer-events-none">
@@ -177,7 +168,27 @@ export function HeroSection() {
                 </div>
               </div>
 
-              {/* Speed/RPM Readout (Removed per user request) */}
+              {/* Speed/RPM Readout */}
+              <div className="absolute top-[5%] left-[5%] md:top-auto md:bottom-[15%] md:-right-[5%] md:left-auto text-left md:text-right font-mono text-primary/90 block">
+                <div className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tighter drop-shadow-[0_0_15px_rgba(255,69,0,0.5)]">
+                  {speed} <span className="text-xs md:text-xl text-primary/50 tracking-normal">MPH</span>
+                </div>
+                <div className="text-sm md:text-2xl lg:text-3xl mt-1 font-light opacity-80">
+                  {rpm} <span className="text-[10px] md:text-sm text-primary/50">RPM</span>
+                </div>
+                
+                {/* Waveform fake */}
+                <div className="flex items-end justify-start md:justify-end gap-1 h-4 md:h-8 mt-2 md:mt-4">
+                  {[...Array(12)].map((_, i) => (
+                    <motion.div 
+                      key={i}
+                      className="w-1 md:w-1.5 bg-primary/70"
+                      animate={{ height: ['20%', '100%', '20%'] }}
+                      transition={{ duration: 0.5 + ((i * 7) % 10) / 10, repeat: Infinity, ease: 'easeInOut' }}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
 
             {/* Soft shadow underneath car */}
