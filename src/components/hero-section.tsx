@@ -117,6 +117,17 @@ export function HeroSection() {
           transition={{ duration: 1, delay: 0.5 }}
         />
 
+        {/* --- LAYER 1 (Behind Car Tech Circles) --- */}
+        <motion.div 
+          className="absolute inset-0 flex items-center justify-center md:justify-end md:pr-[10vw] pointer-events-none z-0 hidden md:flex"
+          style={{ x: layer1X, y: layer1Y }}
+        >
+          <div className="relative w-[65vw] max-w-[1200px] aspect-[16/9]">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] border-[1px] border-primary/20 rounded-full animate-[spin_60s_linear_infinite]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] border-[1px] border-dashed border-primary/20 rounded-full animate-[spin_40s_linear_infinite_reverse]" />
+          </div>
+        </motion.div>
+
         {/* --- LAYER 0 (Main Car Subject - Bare Rotating Car Only) --- */}
         <motion.div 
           className="order-2 md:order-none relative md:absolute inset-0 flex items-center justify-center md:justify-end md:pr-[5vw] lg:pr-[10vw] z-10 pointer-events-none pb-12 pt-8 md:pb-0 md:pt-0 w-full"
@@ -130,10 +141,6 @@ export function HeroSection() {
           >
             {/* Isolated Car Rotator */}
             <CarRotator />
-
-            {/* Target Reticle (Circles and Lines) */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border border-primary/20 rounded-full animate-[spin_60s_linear_infinite] pointer-events-none" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] border border-primary/10 rounded-full animate-[spin_90s_linear_infinite_reverse] pointer-events-none" />
 
             {/* Test: Waveform fake isolated */}
             <div className="absolute inset-0 z-20 pointer-events-none">
@@ -165,6 +172,17 @@ export function HeroSection() {
               </div>
             </div>
           </motion.div>
+        </motion.div>
+
+        {/* --- LAYER 2 (Foreground Details) --- */}
+        <motion.div 
+          className="absolute inset-0 flex items-center justify-center md:justify-end md:pr-[10vw] pointer-events-none z-20 hidden md:flex"
+          style={{ x: layer2X, y: layer2Y }}
+        >
+          <div className="relative w-[65vw] max-w-[1200px] aspect-[16/9]">
+            <div className="absolute top-1/4 left-1/4 w-8 h-8 border-t-2 border-l-2 border-primary/40" />
+            <div className="absolute bottom-1/4 right-1/4 w-8 h-8 border-b-2 border-r-2 border-primary/40" />
+          </div>
         </motion.div>
 
         {/* --- MAIN TEXT CONTENT (Left Aligned) --- */}
