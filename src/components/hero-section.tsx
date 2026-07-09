@@ -131,15 +131,22 @@ export function HeroSection() {
             {/* Isolated Car Rotator */}
             <CarRotator />
 
+            {/* Target Reticle (Circles and Lines) */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border border-primary/20 rounded-full animate-[spin_60s_linear_infinite] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] border border-primary/10 rounded-full animate-[spin_90s_linear_infinite_reverse] pointer-events-none" />
+
             {/* Test: Waveform fake isolated */}
             <div className="absolute inset-0 z-20 pointer-events-none">
               
-              {/* Speed/RPM Readout (Top Left) */}
-              <div className="absolute top-[5%] left-[5%] text-left font-mono text-primary/90 block pointer-events-auto">
+              {/* Speed/RPM Readout (Top Right instead of Left to avoid title overlap) */}
+              <div className="absolute top-[5%] right-[5%] text-right font-mono text-primary/90 block pointer-events-auto">
                 <div className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tighter drop-shadow-[0_0_15px_rgba(255,69,0,0.5)]">
                   <motion.span>{speedText}</motion.span> <span className="text-xs md:text-xl text-primary/50 tracking-normal">MPH</span>
                 </div>
-                <div className="flex justify-between items-end border-b border-white/20 pb-2">
+                <div className="text-sm md:text-2xl lg:text-3xl mt-1 font-light opacity-80 mb-2">
+                  <motion.span>{rpmText}</motion.span> <span className="text-[10px] md:text-sm text-primary/50">RPM</span>
+                </div>
+                <div className="hidden md:flex justify-end items-end border-b border-white/20 pb-2 gap-4">
                   <span className="font-mono text-[10px] text-primary/70 tracking-widest">{dict.hero.hud.v12}</span>
                   <span className="font-mono text-[10px] text-primary/70 tracking-widest">{dict.hero.hud.aero}</span>
                 </div>

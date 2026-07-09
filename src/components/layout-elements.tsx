@@ -191,11 +191,12 @@ export function Navbar() {
 
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center"
+          <motion.div
+            initial={{ opacity: 0, y: '-100%' }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: '-100%' }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed top-0 left-0 w-screen h-[100dvh] z-[55] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8"
           >
             <nav className="flex flex-col items-center gap-8">
               {[

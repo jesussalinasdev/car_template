@@ -3,21 +3,6 @@ import { motion } from 'framer-motion';
 import { useI18n } from '@/components/i18n-provider';
 
 
-const legends = [
-  {
-    name: 'Viktor "The Surgeon" Volkov',
-    role: 'Lead Engine Calibrator',
-    specialty: 'Twin-Turbo V10s, Custom ECU Mapping',
-    image: '/assets/marcus-vance_2.jpg' 
-  },
-  {
-    name: 'Marcus Vance',
-    role: 'Aerodynamics & Chassis',
-    specialty: 'Carbon Fabrication, Suspension Geometry',
-    image: '/assets/marcus-vance.jpg' 
-  }
-];
-
 export function TeamSection() {
   const { dict } = useI18n();
   return (
@@ -44,8 +29,19 @@ export function TeamSection() {
           </motion.h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8">
-          {legends.map((legend, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 relative z-10">
+          {dict.team.legends.map((legend: any, i: number) => {
+            const originalImages = [
+              '/assets/marcus-vance_2.jpg',
+              '/assets/marcus-vance_2.jpg',
+              '/assets/marcus-vance_2.jpg'
+            ];
+            const originalNames = [
+              'Viktor "The Surgeon" Volkov',
+              'Elena Rostova',
+              'Marcus Vance'
+            ];
+            return (
             <motion.div 
               key={i}
               initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
@@ -57,8 +53,8 @@ export function TeamSection() {
               {/* Image Container with Clip Path */}
               <div className="relative aspect-[3/4] overflow-hidden clip-diagonal grayscale group-hover:grayscale-0 transition-all duration-700">
                 <img 
-                  src={legend.image} 
-                  alt={legend.name}
+                  src={originalImages[i]} 
+                  alt={originalNames[i]}
                   className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
@@ -73,7 +69,7 @@ export function TeamSection() {
               {/* Info Box - Overlapping on Desktop, Stacking on Mobile */}
               <div className="relative mt-4 md:absolute md:-bottom-8 md:bottom-12 md:-right-8 bg-neutral-900 border border-neutral-800 p-6 md:w-80 shadow-2xl z-20 group-hover:border-primary/50 transition-colors duration-500 clip-diagonal mx-4 md:mx-0">
                 <div className="font-mono text-xs text-primary mb-2">ID: 00{i+1} // ACTIVE</div>
-                <h4 className="font-display text-3xl uppercase text-white mb-1">{legend.name}</h4>
+                <h4 className="font-display text-2xl text-white uppercase mb-1">{originalNames[i]}</h4>
                 <p className="font-sans font-bold text-sm text-neutral-300 uppercase mb-4 tracking-wider">{legend.role}</p>
                 
                 <div className="pt-4 border-t border-neutral-800">
@@ -82,7 +78,7 @@ export function TeamSection() {
                 </div>
               </div>
             </motion.div>
-          ))}
+          )})}
         </div>
       </div>
     </section>

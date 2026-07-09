@@ -91,7 +91,21 @@
   "team": {
     "tagline": "The Architects of Speed",
     "title": "Master Mechanics",
-    "specialty": "Specialty"
+    "specialty": "Specialty",
+    "legends": [
+      {
+        "role": "Lead Engine Calibrator",
+        "specialty": "Twin-Turbo V10s, Custom ECU Mapping"
+      },
+      {
+        "role": "Aerodynamics & Suspension",
+        "specialty": "Active Aero, Track-Focused Geometry"
+      },
+      {
+        "role": "Carbon Fabrication",
+        "specialty": "Pre-preg Carbon, Widebody Integration"
+      }
+    ]
   },
   "testimonials": {
     "bgText": "NO COMPROMISE",

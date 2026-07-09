@@ -91,7 +91,21 @@
   "team": {
     "tagline": "Los Arquitectos de la Velocidad",
     "title": "Mecánicos Maestros",
-    "specialty": "Especialidad"
+    "specialty": "Especialidad",
+    "legends": [
+      {
+        "role": "Calibrador Principal de Motores",
+        "specialty": "V10 Biturbo, Mapeo Personalizado ECU"
+      },
+      {
+        "role": "Aerodinámica y Suspensión",
+        "specialty": "Aero Activa, Geometría para Pista"
+      },
+      {
+        "role": "Fabricación de Carbono",
+        "specialty": "Carbono Pre-impregnado, Integración Widebody"
+      }
+    ]
   },
   "testimonials": {
     "bgText": "SIN COMPROMISO",
