@@ -156,7 +156,7 @@ export function HeroSection() {
               </motion.svg>
             </div>
 
-            <AnimatePresence mode="popLayout">
+            <AnimatePresence>
               <motion.img 
                 key={activeIndex}
                 src={["/assets/hero-car-front-34.png", "/assets/hero-car-side.png", "/assets/hero-car-rear-34.png", "/assets/hero-car-front.png"][activeIndex]} 
@@ -192,7 +192,7 @@ export function HeroSection() {
               </div>
 
               {/* Speed/RPM Readout */}
-              <div className="absolute bottom-[10%] right-[10%] md:bottom-[15%] md:-right-[5%] text-right font-mono text-primary/90 block">
+              <div className="absolute top-[5%] left-[5%] md:top-auto md:bottom-[15%] md:-right-[5%] md:left-auto text-left md:text-right font-mono text-primary/90 block">
                 <div className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tighter drop-shadow-[0_0_15px_rgba(255,69,0,0.5)]">
                   {speed} <span className="text-xs md:text-xl text-primary/50 tracking-normal">MPH</span>
                 </div>
@@ -201,7 +201,7 @@ export function HeroSection() {
                 </div>
                 
                 {/* Waveform fake */}
-                <div className="flex items-end justify-end gap-1 h-4 md:h-8 mt-2 md:mt-4">
+                <div className="flex items-end justify-start md:justify-end gap-1 h-4 md:h-8 mt-2 md:mt-4">
                   {[...Array(12)].map((_, i) => (
                     <motion.div 
                       key={i}
