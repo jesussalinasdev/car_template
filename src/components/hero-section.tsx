@@ -129,6 +129,20 @@ export function HeroSection() {
           >
             {/* Isolated Car Rotator */}
             <CarRotator />
+
+            {/* Test: Waveform fake isolated */}
+            <div className="absolute inset-0 z-20 pointer-events-none">
+              <div className="absolute top-[5%] left-[5%] md:top-auto md:bottom-[15%] md:-right-[5%] md:left-auto flex items-end justify-start md:justify-end gap-1 h-4 md:h-8">
+                {[...Array(12)].map((_, i) => (
+                  <motion.div 
+                    key={i}
+                    className="w-1 md:w-1.5 bg-primary/70"
+                    animate={{ height: ['20%', '100%', '20%'] }}
+                    transition={{ duration: 0.5 + ((i * 7) % 10) / 10, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                ))}
+              </div>
+            </div>
           </motion.div>
         </motion.div>
 
