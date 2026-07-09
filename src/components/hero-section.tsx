@@ -191,6 +191,7 @@ export function HeroSection() {
                 </div>
                 <div className="text-sm md:text-2xl lg:text-3xl mt-1 font-light opacity-80">
                   {rpm} <span className="text-[10px] md:text-sm text-primary/50">RPM</span>
+                </div>
               </div>
             </div>
 
