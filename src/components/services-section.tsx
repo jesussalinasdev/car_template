@@ -127,7 +127,7 @@ export function ServicesSection() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service, i) => (
+          {services.map((service: any, i: number) => (
             <ServiceCard key={i} service={service} index={i} />
           ))}
         </div>
