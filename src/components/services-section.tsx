@@ -69,7 +69,7 @@ function ServiceCard({ service, index }: { service: any, index: number }) {
         rotateX,
         rotateY,
       }}
-      className="relative w-full aspect-[4/5] perspective-1000 group cursor-none"
+      className="relative w-full h-auto md:aspect-[4/5] perspective-1000 group cursor-none"
     >
       <div className="absolute inset-0 bg-neutral-900 border border-neutral-800 clip-diagonal-reverse overflow-hidden transition-colors duration-500 group-hover:border-primary/50">
         
@@ -82,7 +82,7 @@ function ServiceCard({ service, index }: { service: any, index: number }) {
         </div>
 
         <div className="relative h-full p-8 flex flex-col z-10" style={{ transform: 'translateZ(50px)' }}>
-          <div className="flex justify-between items-start mb-12 md:mb-auto">
+          <div className="flex justify-end items-start mb-6 md:mb-auto">
             <div className="text-primary border border-primary/30 p-2 bg-primary/5 clip-diagonal flex items-center justify-center">
               {getServiceIcon(index)}
             </div>
