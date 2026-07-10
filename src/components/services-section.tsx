@@ -71,7 +71,7 @@ function ServiceCard({ service, index }: { service: any, index: number }) {
       }}
       className="relative w-full h-auto md:aspect-[4/5] perspective-1000 group cursor-none"
     >
-      <div className="absolute inset-0 bg-neutral-900 border border-neutral-800 clip-diagonal-reverse overflow-hidden transition-colors duration-500 group-hover:border-primary/50">
+      <div className="relative w-full h-full bg-neutral-900 border border-neutral-800 clip-diagonal-reverse overflow-hidden transition-colors duration-500 group-hover:border-primary/50">
         
         {/* Background gradient effect on hover */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
