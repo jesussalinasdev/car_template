@@ -121,12 +121,15 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center border-t border-neutral-900 pt-8 text-neutral-600 font-mono text-xs uppercase tracking-widest">
+        <div className="flex flex-col md:flex-row justify-between items-center border-t border-neutral-900 pt-8 text-neutral-600 font-mono text-xs uppercase tracking-widest gap-4 md:gap-0">
           <p>© {new Date().getFullYear()} {dict.footer.copyright}</p>
-          <div className="flex gap-4 mt-4 md:mt-0">
+          <div className="flex gap-4">
             <a href="#" className="hover:text-primary transition-colors">{dict.footer.links.privacy}</a>
             <a href="#" className="hover:text-primary transition-colors">{dict.footer.links.terms}</a>
           </div>
+          <p className="text-neutral-500">
+            Developed by <a href="https://jsalinas.dev" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors border-b border-primary/30 pb-0.5">jsalinas.dev</a>
+          </p>
         </div>
       </div>
     </footer>
