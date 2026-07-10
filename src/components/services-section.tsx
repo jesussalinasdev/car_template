@@ -55,7 +55,7 @@ function ServiceCard({ service, index }: { service: any, index: number }) {
         </div>
 
         <div className="relative h-full p-8 flex flex-col z-10" style={{ transform: 'translateZ(50px)' }}>
-          <div className="flex justify-between items-start mb-auto">
+          <div className="flex justify-between items-start mb-12 md:mb-auto">
             <span className="text-primary font-mono text-sm border border-primary/30 px-2 py-1 bg-primary/5 clip-diagonal">
               SYS.{service.icon}
             </span>
