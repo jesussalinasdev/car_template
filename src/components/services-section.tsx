@@ -1,6 +1,33 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useI18n } from '@/components/i18n-provider';
+import { Zap, Crosshair, Hexagon, Activity } from 'lucide-react';
+
+const getServiceIcon = (index: number) => {
+  switch (index) {
+    case 0: return (
+      <motion.div animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.2, 1] }} transition={{ duration: 2, repeat: Infinity }}>
+        <Zap size={24} />
+      </motion.div>
+    );
+    case 1: return (
+      <motion.div animate={{ rotate: 360 }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }}>
+        <Crosshair size={24} />
+      </motion.div>
+    );
+    case 2: return (
+      <motion.div animate={{ opacity: [1, 0.5, 1], scale: [1, 0.9, 1] }} transition={{ duration: 3, repeat: Infinity }}>
+        <Hexagon size={24} />
+      </motion.div>
+    );
+    case 3: return (
+      <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1.5, repeat: Infinity }}>
+        <Activity size={24} />
+      </motion.div>
+    );
+    default: return <Zap size={24} />;
+  }
+};
 
 function ServiceCard({ service, index }: { service: any, index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -56,9 +83,9 @@ function ServiceCard({ service, index }: { service: any, index: number }) {
 
         <div className="relative h-full p-8 flex flex-col z-10" style={{ transform: 'translateZ(50px)' }}>
           <div className="flex justify-between items-start mb-12 md:mb-auto">
-            <span className="text-primary font-mono text-sm border border-primary/30 px-2 py-1 bg-primary/5 clip-diagonal">
-              SYS.{service.icon}
-            </span>
+            <div className="text-primary border border-primary/30 p-2 bg-primary/5 clip-diagonal flex items-center justify-center">
+              {getServiceIcon(index)}
+            </div>
           </div>
 
           <div>
